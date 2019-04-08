@@ -1,0 +1,14 @@
+2019-03-22 16:22:18.434  INFO 5948 --- [restartedMain] nSportsCenterManagementSystemApplication : Starting YongchuanSportsCenterManagementSystemApplication on ASUS-PC with PID 5948 (E:\Yongchuan-Sports-Center-Management-System\target\classes started by Administrator in E:\Yongchuan-Sports-Center-Management-System)
+2019-03-22 16:22:18.434  INFO 5948 --- [restartedMain] nSportsCenterManagementSystemApplication : No active profile set, falling back to default profiles: default
+2019-03-22 16:22:18.854  INFO 5948 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-03-22 16:22:18.854  INFO 5948 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-03-22 16:22:18.870  INFO 5948 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-03-22 16:22:19.041  WARN 5948 --- [restartedMain] org.thymeleaf.templatemode.TemplateMode  : [THYMELEAF][restartedMain] Template Mode 'HTML5' is deprecated. Using Template Mode 'HTML' instead.
+2019-03-22 16:22:19.163  INFO 5948 --- [restartedMain] nSportsCenterManagementSystemApplication : Started YongchuanSportsCenterManagementSystemApplication in 0.835 seconds (JVM running for 7803.107)
+2019-03-22 16:22:27.507  INFO 5948 --- [restartedMain] nSportsCenterManagementSystemApplication : Starting YongchuanSportsCenterManagementSystemApplication on ASUS-PC with PID 5948 (E:\Yongchuan-Sports-Center-Management-System\target\classes started by Administrator in E:\Yongchuan-Sports-Center-Management-System)
+2019-03-22 16:22:27.507  INFO 5948 --- [restartedMain] nSportsCenterManagementSystemApplication : No active profile set, falling back to default profiles: default
+2019-03-22 16:22:27.862  INFO 5948 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-03-22 16:22:27.862  INFO 5948 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.14]
+2019-03-22 16:22:27.880  INFO 5948 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-03-22 16:22:28.036  WARN 5948 --- [restartedMain] org.thymeleaf.templatemode.TemplateMode  : [THYMELEAF][restartedMain] Template Mode 'HTML5' is deprecated. Using Template Mode 'HTML' instead.
+2019-03-22 16:22:28.121  INFO 5948 --- [restartedMain] nSportsCenterManagementSystemApplication : Started YongchuanSportsCenterManagementSystemApplication in 0.65 seconds (JVM running for 7812.065)

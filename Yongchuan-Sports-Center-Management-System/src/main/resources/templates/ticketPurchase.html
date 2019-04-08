@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="../static/js/jquery-3.3.1.min.js"></script>
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="../static/js/bootstrap.min.js"></script>
+    <link href="../static/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/ticket.css" rel="stylesheet" type="text/css">
+   <!-- <script src="webjars/jquery/1.12.1/jquery.min.js"></script>
+    <link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="../static/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/ticket.css" rel="stylesheet" type="text/css">-->
+    <title>购票系统</title>
+</head>
+<body>
+<div data-role="page" style="overflow-x: hidden;/* background: #eaeaea;*/">
+    <div class="container" data-role="content">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1" style="text-align:center">
+                <!--选项卡-->
+                <div th:if="1<0">123</div>
+                <div class="search">
+                    <dl class="Categories">
+                        <dt class="left">分&ensp;类：</dt>
+                        <dd class="all"><a th:href="@{/ticketPurchase(type='',subtype='')}" th:class="${type==''?'this':''}" >全部</a></dd>
+                        <dd class="right" style="float: left;width: 75%;">
+                            <ul style="padding: 0;" >
+                                <li><a th:href="@{/ticketPurchase(type='Music',subtype='')}" th:class="${type=='Music'?'this':''}" value="Music">音乐会</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Theatre',subtype='')}" th:class="${type=='Theatre'?'this':''}" value="Theatre">戏剧</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Concert',subtype='')}" th:class="${type=='Concert'?'this':''}" value="Concert">演唱会</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Dance',subtype='')}" th:class="${type=='Dance'?'this':''}" value="Dance">舞蹈</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='TraditionalOpera',subtype='')}" th:class="${type=='TraditionalOpera'?'this':''}" value="TraditionalOpera">戏曲</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Sports',subtype='')}" th:class="${type=='Sports'?'this':''}" value="Sports">体育</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Acrobatics',subtype='')}" th:class="${type=='Acrobatics'?'this':''}" value="Acrobatics">杂技</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                    <dl class="Small_class" th:if="${type!=''}">
+                        <dt class="left">子&ensp;类：</dt>
+                        <dd class="right">
+                            <ul style="padding: 0;" th:if="${type=='Music'}">
+                                <li><a th:href="@{/ticketPurchase(type='Music',subtype='Chorus')}" class="" value='Chorus'>声乐及合唱</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Music',subtype='AncientMusic')}" class="" value='AncientMusic'>室内乐及古乐</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Music',subtype='Solo')}" class="" value='Solo'>独奏</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Music',subtype='Other')}" class="" value='Other'>其他</a></li>
+                            </ul>
+                        </dd>
+                        <dd class="right" th:if="${type=='Theatre'}">
+                            <ul style="padding: 0;">
+                                <li><a th:href="@{/ticketPurchase(type='Theatre',subtype='Drama')}" class="" value='Drama'>话剧</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Theatre',subtype='Opera')}" class="" value='Opera'>歌剧</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Theatre',subtype='TheLivingTheatre')}" class="" value='TheLivingTheatre'>舞台剧</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Theatre',subtype='Other')}" class="" value='Other'>其他</a></li>
+                            </ul>
+                        </dd>
+                        <dd class="right" style="" th:if="${type=='Concert'}">
+                            <ul style="padding: 0;">
+                                <li><a th:href="@{/ticketPurchase(type='Concert',subtype='Rock')}" class="" value='Rock'>摇滚</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Concert',subtype='Nation')}" class="" value='Nation'>民族</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Concert',subtype='Popular')}" class="" value='Popular'>流行</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Concert',subtype='Festival')}" class="" value='Festival'>音乐节</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Concert',subtype='Sir')}" class="" value='Sir'>爵士</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Concert',subtype='Other')}" class="" value='Other'>其他</a></li>
+                            </ul>
+                        </dd>
+                        <dd class="right" style="" th:if="${type=='Dance'}">
+                            <ul style="padding: 0;">
+                                <li><a th:href="@{/ticketPurchase(type='Dance',subtype='LatinDance')}" class="" value='LatinDance'>拉丁舞</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Dance',subtype='ModernDance')}" class="" value='ModernDance'>现代舞</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Dance',subtype='FolkDance')}" class="" value='FolkDance'>民族舞</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Dance',subtype='Ballet')}" class="" value='Ballet'>芭蕾舞</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Dance',subtype='Jazz')}" class="" value='Jazz'>爵士舞</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Dance',subtype='ModernDancing')}" class="" value='ModernDancing'>摩登舞</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Dance',subtype='Other')}" class="" value='Other'>其他</a></li>
+                            </ul>
+                        </dd>
+                        <dd class="right" style="" th:if="${type=='TraditionalOpera'}">
+                            <ul style="padding: 0;">
+                                <li><a th:href="@{/ticketPurchase(type='TraditionalOpera',subtype='BeijingOpera')}" class="" value='BeijingOpera'>京剧</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='TraditionalOpera',subtype='ShaoxingOpera')}" class="" value='ShaoxingOpera'>越剧</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='TraditionalOpera',subtype='Huangmeixi')}" class="" value='Huangmeixi'>黄梅戏</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='TraditionalOpera',subtype='PingJuOpera')}" class="" value='PingJuOpera'>评剧</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='TraditionalOpera',subtype='HenanOpera')}" class="" value='HenanOpera'>豫剧</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='TraditionalOpera',subtype='Other')}" class="" value='Other'>其他</a></li>
+                            </ul>
+                        </dd>
+                        <dd class="right" style="" th:if="${type=='Sports'}">
+                            <ul style="padding: 0;">
+                                <li><a th:href="@{/ticketPurchase(type='Sports',subtype='Football')}" class="" value='Football'>足球</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Sports',subtype='Basketball')}" class="" value='Basketball'>篮球</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Sports',subtype='TableTennis')}" class="" value='TableTennis'>乒乓球</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Sports',subtype='Swimming')}" class="" value='Swimming'>游泳</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Sports',subtype='Bodybuilding')}" class="" value='Bodybuilding'>健身</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Sports',subtype='Badminton')}" class="" value='Badminton'>羽毛球</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Sports',subtype='Athletics')}" class="" value='Athletics'>田径</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Sports',subtype='Tennis')}" class="" value='Tennis'>网球</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Sports',subtype='Shotput')}" class="" value='Shotput'>铅球</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Sports',subtype='Other')}" class="" value='Other'>其他</a></li>
+                            </ul>
+                        </dd>
+                        <dd class="right" style="" th:if="${type=='Acrobatics'}">
+                            <ul style="padding: 0;">
+                                <li><a th:href="@{/ticketPurchase(type='Acrobatics',subtype='Acrobatics')}" class="" value='Acrobatics'>器械杂技</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Acrobatics',subtype='BodyAcrobatics')}" class="" value='BodyAcrobatics'>形体杂技</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Acrobatics',subtype='AerialAcrobatics')}" class="" value='AerialAcrobatics'>高空杂技</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Acrobatics',subtype='OralSkills')}" class="" value='OralSkills'>口技</a></li>
+                                <li><a th:href="@{/ticketPurchase(type='Acrobatics',subtype='Other')}" class="" value='Other'>其他</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+                <!--票据信息-->
+                <div class="ticket">
+                    <ul>
+                        <li th:each="ticket : ${Tickets}">
+                            <div class="search_img">
+                                <img alt="" th:src="${ticket.poster}">
+                                <div class="info">
+                                    <h3>【<span th:text="${ticket.address}"></span>】<a href="#" target="_blank" th:text="${ticket.title}"></a></h3>
+                                    <p class="txt_time">
+                                        <a href="#"><span class="fa fa-calendar" th:text="${#dates.format(ticket.showTimeStart,'yyyy/MM/dd HH:MM')}"></span></a>
+                                    </p>
+                                    <p class="txt_add">
+                                        <a href="#"><span class="fa fa-map-marker " th:text="${ticket.detailedAddress}+'-'+${ticket.address}"></span></a>
+                                    </p>
+                                    <p class="txt_piao">
+                                        <em th:text="${ticket.price}"></em>
+                                        <span class="badge green" th:text="已售完" th:if="${ticket.state=='ending'}"></span>
+                                        <span class="badge green" th:text="售票中" th:if="${ticket.state=='Ticketing'}"></span>
+                                        <span class="badge green" th:text="待售" th:if="${ticket.state=='Waiting'}"></span>
+                                    </p>
+                                </div>
+                                <div class="gp_btn">
+                                    <span th:text="${ticket.id}" style="display: none"></span>
+                                    <button class="btn btn-primary" style="float: right;"  data-toggle="modal" data-target="#empUpdateModal1" id="BuyTicket">购票</button>
+                                    <div class="check_num">
+                                        <a class="reduce" onClick="setAmount.reduce('#qty_item_1')" href="javascript:void(0)"> - </a>
+                                        <input type="text" name="qty_item_1" value="1" id="qty_item_1" onKeyUp="setAmount.modify('#qty_item_1')" class="text"/>
+                                        <a class="add" onClick="setAmount.add('#qty_item_1')" href="javascript:void(0)"> + </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <!--购票模态框-->
+                    <div class="modal fade" id="empUpdateModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">购票信息</h4>
+                                </div>
+                                <div class="modal-body" style="height: 250px;">
+                                    <form>
+                                        <a name="commodityId" id="commodityId" style="display: none"></a>
+                                        <a name="payer" style="display: none" th:value="session.user.username"></a>
+                                        <div class="info">
+                                            <h3>【<span id="address"></span>】<a href="#" target="" name="commodityName" id="commodityName"></a></h3>
+                                            <p class="txt_time">
+                                                <a href="#"><span class="fa fa-calendar" id="startTime"></span></a>
+                                            </p>
+                                            <p class="txt_add">
+                                                <a href="#"><span class="fa fa-map-marker " id="detailedAddress"></span></a>
+                                            </p>
+                                            <p class="num">
+                                                <a class="chose">
+                                                    <!--<img src="../static/img/1.png">-->
+                                                    选区：
+                                                    <select name="partition" id="partition">
+                                                        <option>A</option>
+                                                        <option>B</option>
+                                                        <option>C</option>
+                                                        <option>D</option>
+                                                        <option>E</option>
+                                                        <option>F</option>
+                                                        <option>G</option>
+                                                        <option>H</option>
+                                                        <option>I</option>
+                                                        <option>J</option>
+                                                    </select>
+                                                </a>&emsp;
+                                                <span>单价：<em><a name="univalence" id="univalence"></a></em>元</span>&emsp;
+                                                <span>数量：<em><a id="number" name="number"></a></em>张</span>
+                                            </p>
+                                        </div>
+                                        <h3 class="zongjia">共计：<em><a id="totalPrice" name="totalPrice"></a></em>元</h3>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary" id="pay">付款</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--分页-->
+                    <footer class="site-footer">
+                        <div>
+                            <div style="text-align: center">
+                                显示
+                                <span class="num1" th:if="${page.size}>=10">10</span>
+                                <span class="num1" th:if="${page.size}<10" th:text="${page.size}"></span>
+                                条记录，共<span class="num1" th:text="${page.total}"></span>条记录
+                            </div>
+                            <div style="text-align: center;">
+                                <ul class="pagination">
+                                    <li><a th:href="@{/ticketPurchase(type=${type},subtype=${subtype},PageNum=1)}">首页</a></li>
+                                    <li><a th:href="@{/ticketPurchase(type=${type},subtype=${subtype},PageNum=${page.prePage})}" th:onclick="Jump(${page.prePage})" th:if="${page.isFirstPage}==false">&lt;上一页</a></li>
+                                    <li th:each="navigatepageNum : ${page.navigatepageNums}">
+                                        <a th:value="${navigatepageNum}" th:text="${navigatepageNum}" th:href="@{/ticketPurchase(type=${type},subtype=${subtype},PageNum=${navigatepageNum})}"></a>
+                                    </li>
+                                    <li><a th:href="@{/ticketPurchase(type=${type},subtype=${subtype},PageNum=${page.nextPage})}" th:if="${page.isLastPage}==false">下一页&gt;</a></li>
+                                    <li><a th:href="@{/ticketPurchase(type=${type},subtype=${subtype},PageNum=${page.pages})}">末页</a></li>
+                                </ul>
+                            </div>
+                            <!-- <span><input type="text" class="ipt" value="" id="_page_input_num" #if($pages == 0)disabled#end/></span>
+                              <span><input type="button" value="跳转" class="sure" id="Jump"  #if($pages == 0)disabled#end/></span>-->
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div data-role="footer">
+
+    </div>
+</div>
+
+<script>
+    //  数量增减（1~4张）
+    var setAmount = {
+        min:1,
+        max:4,
+        reg:function(x) {
+            return new RegExp("^[1-9]\\d*$").test(x);
+        },
+        amount:function(obj, mode) {
+            var x = $(obj).val();
+            if (this.reg(x)) {
+                if (mode) {
+                    x++;
+                } else {
+                    x--;
+                }
+            } else {
+                alert("请输入正确的数量！");
+                $(obj).val(1);
+                $(obj).focus();
+            }
+            return x;
+        },
+        reduce:function(obj) {
+            var x = this.amount(obj, false);
+            if (x >= this.min) {
+                $(obj).val(x);
+                // recalc();
+            } else {
+                alert("商品数量最少为" + this.min);
+                $(obj).val(1);
+                $(obj).focus();
+            }
+        },
+        add:function(obj) {
+            var x = this.amount(obj, true);
+            if (x <= this.max) {
+                $(obj).val(x);
+                recalc();
+            } else {
+                alert("商品数量最多为" + this.max);
+                $(obj).val(4);
+                $(obj).focus();
+            }
+        },
+        modify:function(obj) {
+            var x = $(obj).val();
+            if (x < this.min || x > this.max || !this.reg(x)) {
+                alert("请输入正确的数量！");
+                $(obj).val(1);
+                $(obj).focus();
+            }
+        }
+    };
+
+    // modal 模态框
+    $("#empUpdateModal").modal({
+        backdrop:"static"
+    });
+    //获取票价信息
+    $("#BuyTicket").click(function () {
+        var id=$(this).parent().find("span").text();
+        var number = $("#qty_item_1").val();
+       $.ajax({
+           url:"/ticket/"+id,
+           type:"GET",
+           success:function (result) {
+               console.log(result);
+             $("#commodityId").text(result.id);
+             $("#commodityName").text(result.title);
+            $("#univalence").text(result.aArea);
+            $("#startTime").text(result.showTimeStart);
+            $("#number").text(number);
+            $("#address").text(result.address);
+            $("#totalPrice").text(number*result.aArea);
+            $("#detailedAddress").text(result.address+"-"+result.detailedAddress);
+           }
+       })
+    });
+    var Pay = document.getElementById("pay");
+    Pay.onclick = function () {
+
+    };
+
+</script>
+</body>
+</html>

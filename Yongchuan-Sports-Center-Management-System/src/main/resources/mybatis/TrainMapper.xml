@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqwu.graduation.mapper.TrainMapper">
+  <resultMap id="BaseResultMap" type="com.cqwu.graduation.bean.Train">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="subject" jdbcType="VARCHAR" property="subject" />
+    <result column="teacher" jdbcType="VARCHAR" property="teacher" />
+    <result column="surplus" jdbcType="INTEGER" property="surplus" />
+    <result column="quota" jdbcType="INTEGER" property="quota" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="total_hours" jdbcType="INTEGER" property="totalHours" />
+    <result column="hours" jdbcType="INTEGER" property="hours" />
+    <result column="everyday_hours" jdbcType="INTEGER" property="everydayHours" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="raw_add_time" jdbcType="TIMESTAMP" property="rawAddTime" />
+    <result column="raw_update_time" jdbcType="TIMESTAMP" property="rawUpdateTime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, subject, teacher, surplus, quota, state, total_hours, hours, everyday_hours, 
+    start_time, raw_add_time, raw_update_time, description
+  </sql>
+  <select id="selectByExample" parameterType="com.cqwu.graduation.bean.TrainExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from train
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.cqwu.graduation.bean.TrainExample">
+    delete from train
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cqwu.graduation.bean.Train">
+    insert into train (id, subject, teacher, 
+      surplus, quota, state, 
+      total_hours, hours, everyday_hours, 
+      start_time, raw_add_time, raw_update_time, 
+      description)
+    values (#{id,jdbcType=INTEGER}, #{subject,jdbcType=VARCHAR}, #{teacher,jdbcType=VARCHAR}, 
+      #{surplus,jdbcType=INTEGER}, #{quota,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}, 
+      #{totalHours,jdbcType=INTEGER}, #{hours,jdbcType=INTEGER}, #{everydayHours,jdbcType=INTEGER}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{rawAddTime,jdbcType=TIMESTAMP}, #{rawUpdateTime,jdbcType=TIMESTAMP}, 
+      #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cqwu.graduation.bean.Train">
+    insert into train
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="subject != null">
+        subject,
+      </if>
+      <if test="teacher != null">
+        teacher,
+      </if>
+      <if test="surplus != null">
+        surplus,
+      </if>
+      <if test="quota != null">
+        quota,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="totalHours != null">
+        total_hours,
+      </if>
+      <if test="hours != null">
+        hours,
+      </if>
+      <if test="everydayHours != null">
+        everyday_hours,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="rawAddTime != null">
+        raw_add_time,
+      </if>
+      <if test="rawUpdateTime != null">
+        raw_update_time,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="subject != null">
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="teacher != null">
+        #{teacher,jdbcType=VARCHAR},
+      </if>
+      <if test="surplus != null">
+        #{surplus,jdbcType=INTEGER},
+      </if>
+      <if test="quota != null">
+        #{quota,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="totalHours != null">
+        #{totalHours,jdbcType=INTEGER},
+      </if>
+      <if test="hours != null">
+        #{hours,jdbcType=INTEGER},
+      </if>
+      <if test="everydayHours != null">
+        #{everydayHours,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rawAddTime != null">
+        #{rawAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rawUpdateTime != null">
+        #{rawUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cqwu.graduation.bean.TrainExample" resultType="java.lang.Long">
+    select count(*) from train
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update train
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.subject != null">
+        subject = #{record.subject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacher != null">
+        teacher = #{record.teacher,jdbcType=VARCHAR},
+      </if>
+      <if test="record.surplus != null">
+        surplus = #{record.surplus,jdbcType=INTEGER},
+      </if>
+      <if test="record.quota != null">
+        quota = #{record.quota,jdbcType=INTEGER},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalHours != null">
+        total_hours = #{record.totalHours,jdbcType=INTEGER},
+      </if>
+      <if test="record.hours != null">
+        hours = #{record.hours,jdbcType=INTEGER},
+      </if>
+      <if test="record.everydayHours != null">
+        everyday_hours = #{record.everydayHours,jdbcType=INTEGER},
+      </if>
+      <if test="record.startTime != null">
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rawAddTime != null">
+        raw_add_time = #{record.rawAddTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rawUpdateTime != null">
+        raw_update_time = #{record.rawUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update train
+    set id = #{record.id,jdbcType=INTEGER},
+      subject = #{record.subject,jdbcType=VARCHAR},
+      teacher = #{record.teacher,jdbcType=VARCHAR},
+      surplus = #{record.surplus,jdbcType=INTEGER},
+      quota = #{record.quota,jdbcType=INTEGER},
+      state = #{record.state,jdbcType=VARCHAR},
+      total_hours = #{record.totalHours,jdbcType=INTEGER},
+      hours = #{record.hours,jdbcType=INTEGER},
+      everyday_hours = #{record.everydayHours,jdbcType=INTEGER},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      raw_add_time = #{record.rawAddTime,jdbcType=TIMESTAMP},
+      raw_update_time = #{record.rawUpdateTime,jdbcType=TIMESTAMP},
+      description = #{record.description,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

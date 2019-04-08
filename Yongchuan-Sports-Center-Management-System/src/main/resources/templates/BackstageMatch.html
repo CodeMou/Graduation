@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ela Admin - HTML5 Admin Template</title>
+    <meta name="description" content="Ela Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/css/normalize.css">
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/themify-icons.css">
+    <link rel="stylesheet" href="../static/css/pe-icon-7-filled.css">
+    <link rel="stylesheet" href="../static/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../static/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../static/css/chartist.min.css" rel="stylesheet">
+    <link href="../static/css/jqvmap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+<aside id="left-panel" class="left-panel" th:replace="/BackCommon/panel::left-panel"></aside>
+<div id="right-panel" class="right-panel" th:replace="/BackCommon/panel::right-panel"></div>
+        <!-- Breadcrumbs-->
+        <div class="breadcrumbs">
+            <div class="breadcrumbs-inner">
+                <div class="row m-0">
+                    <div class="col-sm-4">
+                        <div class="page-header float-left">
+                            <div class="page-title">
+                                <h1>比赛管理</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="animated fadeIn">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div>
+                                    <table style="text-align: center" class="table">
+                                        <tr><td>类别：</td><td><a th:href="@{/match(category='Football',subject='')}">足球</a></td><td><a th:href="@{/match(category='Basketball',subject='')}">篮球</a></td><td><a th:href="@{/match(category='TableTennis',subject='')}">乒乓球</a></td><td><a th:href="@{/match(category='Swimming',subject='')}">游泳</a></td><td><a th:href="@{/match(category='Bodybuilding',subject='')}">健身</a></td><td><a th:href="@{/match(category='Badminton',subject='')}">羽毛球</a></td><td><a th:href="@{/match(category='Athletics',subject='')}">田径</a></td><td><a th:href="@{/match(category='Tennis',subject='')}">网球</a></td><td><a th:href="@{/match(category='Shotput',subject='')}">铅球</a></td><td><a th:href="@{/match(category='Other',subject='')}">其他</a></td></tr>
+                                        <tr th:if="${category}=='Football'"><td>项目类别：</td><td><a th:href="@{/match(category='Football',subject='Eleven')}">11人制</a></td></tr>
+                                        <tr th:if="${category}=='Basketball'"><td>项目类别：</td><td><a th:href="@{/match(category='Basketball',subject='5V5')}">5V5</a></td></tr>
+                                        <tr th:if="${category}=='TableTennis'"><td>项目类别：</td><td><a th:href="@{/match(category='TableTennis',subject='manOne')}">男子单打</a></td><td><a th:href="@{/match(category='TableTennis',subject='manTwo')}">男子双打</a></td><td><a th:href="@{/match(category='TableTennis',subject='womanOne')}">女子单打</a></td><td><a th:href="@{/match(category='TableTennis',subject='womanTwo')}">女子双打</a></td><td><a th:href="@{/match(category='TableTennis',subject='mix')}">混合双打</a></td></tr>
+                                        <tr th:if="${category}=='Swimming'"><td>项目类别：</td><td><a th:href="@{/match(category='Swimming',subject='backstroke')}">100米仰泳</a></td><td><a th:href="@{/match(category='Swimming',subject='Breaststroke')}">100米蛙泳</a></td><td><a th:href="@{/match(category='Swimming',subject='Butterfly')}">100米蝶泳</a></td><td><a th:href="@{/match(category='Swimming',subject='Free')}">100米自由泳</a></td></tr>
+                                        <tr th:if="${category}=='Badminton'"><td>项目类别：</td><td><a th:href="@{/match(category='Badminton',subject='man_One')}">男子单打</a></td><td><a th:href="@{/match(category='Badminton',subject='man_Two')}">男子双打</a></td><td><a th:href="@{/match(category='Badminton',subject='woman_One')}">女子单打</a></td><td><a th:href="@{/match(category='Badminton',subject='woman_Two')}">女子双打</a></td><td><a th:href="@{/match(category='Badminton',subject='mix_')}">混合双打</a></td></tr>
+                                        <tr th:if="${category}=='Athletics'"><td>项目类别：</td><td><a th:href="@{/match(category='Athletics',subject='50')}">50米跑</a></td><td><a th:href="@{/match(category='Athletics',subject='100')}">100米跑</a></td><td><a th:href="@{/match(category='Athletics',subject='200')}">200米跑</a></td><td><a th:href="@{/match(category='Athletics',subject='400')}">400米跑</a></td><td><a th:href="@{/match(category='Athletics',subject='800')}">800米跑</a></td><td><a th:href="@{/match(category='Athletics',subject='1500')}">1500米跑</a></td><td><a th:href="@{/match(category='Athletics',subject='highJump')}">跳高</a></td><td><a th:href="@{/match(category='Athletics',subject='longJump')}">跳远</a></td></tr>
+                                    </table>
+                                </div>
+                                <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                                    <thead>
+                                    <tr style="white-space:nowrap;">
+                                        <th><input type="checkbox" name="allSel">全选</th>
+                                        <th>id</th>
+                                        <th>赛事名称</th>
+                                        <th>比赛科目</th>
+                                        <th>类别</th>
+                                        <th>目前已报名人数</th>
+                                        <th>状态</th>
+                                        <th>总人数</th>
+                                        <th>举办人或者举办单位</th>
+                                        <th>描述</th>
+                                        <th>科目开始时间</th>
+                                        <th>科目结束时间</th>
+                                        <th>比赛开始时间</th>
+                                        <th>比赛结束时间</th>
+                                        <th>其他操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="match : ${matchs}">
+                                        <td><input type="checkbox" name="select"></td>
+                                        <td th:text="${match.id}"></td>
+                                        <td th:text="${match.name}"></td>
+                                        <td th:text="${match.subject}"></td>
+                                        <td th:text="${match.category}"></td>
+                                        <td th:text="${match.numberNow}"></td>
+                                        <td th:text="报名截止" th:if="${match.state=='ending'}"></td>
+                                        <td th:text="报名中" th:if="${match.state=='Enrolment'}"></td>
+                                        <td th:text="未开始" th:if="${match.state=='Waiting'}"></td>
+                                        <td th:text="${match.number}"></td>
+                                        <td th:text="${match.organizer}"></td>
+                                        <td th:text="${match.description}"></td>
+                                        <td th:text="${#dates.format(match.subjectTimeStart,'yyyy/MM/dd HH:MM')}"></td>
+                                        <td th:text="${#dates.format(match.subjectTimeEnd,'yyyy/MM/dd HH:MM')}"></td>
+                                        <td th:text="${#dates.format(match.matchTimeStart,'yyyy/MM/dd HH:MM')}"></td>
+                                        <td th:text="${#dates.format(match.matchTimeEnd,'yyyy/MM/dd HH:MM')}"></td>
+                                        <td><button type="button" th:text="编辑" class="btn btn-default edit" style="float: left"></button><button type="button" th:text="删除" class="delete btn btn-default" style="float: left"></button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-default" id="addMatch" th:text="新增比赛"></button>
+                    <button type="button" class="btn btn-default" id="deletes" th:text="批量删除"></button>
+                    <button type="button" class="btn btn-default" id="start" th:text="开始报名"></button>
+                    <div class="modal fade" id="empUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">更改比赛</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <input type="hidden" class="form-control" name="id" id="id" >
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name">赛事名称</label>
+                                            <input type="text" class="form-control" value="" name="name" id="name" placeholder="请输入赛事名称">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="category">类别</label>
+                                            <select id="category" name="category">
+                                                <option value="Football">足球</option>
+                                                <option value="Basketball">篮球</option>
+                                                <option value="TableTennis">乒乓球</option>
+                                                <option value="Swimming">游泳</option>
+                                                <option value="Bodybuilding">健身</option>
+                                                <option value="Badminton">羽毛球</option>
+                                                <option value="Athletics">田径</option>
+                                                <option value="Tennis">网球</option>
+                                                <option value="Shotput">铅球</option>
+                                                <option value="Other">其他</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="subject">比赛科目</label>
+                                            <select id="subject" name="subject"></select>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label for="number">总人数</label>
+                                            <input type="text" class="form-control" value="" name="number" id="number" placeholder="请输入总人数">
+                                        </div>
+                                        <div class="form-group">
+                                            <label >举办人或者举办单位：</label><br/>
+                                            <input type="text" class="form-control" value="" name="organizer" id="organizer" placeholder="请选择开始时间" >
+                                        </div>
+                                        <div class="form-group">
+                                            <label >科目时间：</label><br/>
+                                            <input type="text" class="form-control" value="" name="subjectTimeStart" id="subjectTimeStart" placeholder="请选择开始时间" style="width: 40%;display: inline">------<input type="text" class="form-control" value="" name="subjectTimeEnd" id="subjectTimeEnd" placeholder="请选择结束时间" style="width: 40%;display: inline">
+                                        </div>
+                                        <div class="form-group">
+                                            <label >比赛时间：</label><br/>
+                                            <input type="text" class="form-control" value="" name="matchTimeStart" id="matchTimeStart" placeholder="请选择开始时间" style="width: 40%;display: inline">------<input type="text" class="form-control" value="" name="matchTimeEnd" id="matchTimeEnd" placeholder="请选择结束时间" style="width: 40%;display: inline">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                            <button type="submit" class="btn btn-primary" id="update">更改</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="empUpdateModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">新增演出</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <input type="hidden" class="form-control" name="id" id="id1" >
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name">赛事名称</label>
+                                            <input type="text" class="form-control" value="" name="name" id="name1" placeholder="请输入赛事名称">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="category1">类别</label>
+                                            <select id="category1" name="category">
+                                                <option value="Football">足球</option>
+                                                <option value="Basketball">篮球</option>
+                                                <option value="TableTennis">乒乓球</option>
+                                                <option value="Swimming">游泳</option>
+                                                <option value="Bodybuilding">健身</option>
+                                                <option value="Badminton">羽毛球</option>
+                                                <option value="Athletics">田径</option>
+                                                <option value="Tennis">网球</option>
+                                                <option value="Shotput">铅球</option>
+                                                <option value="Other">其他</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="subject1">比赛科目</label>
+                                            <select id="subject1" name="subject"></select>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label for="number">总人数</label>
+                                            <input type="text" class="form-control" value="" name="number" id="number1" placeholder="请输入总人数">
+                                        </div>
+                                        <div class="form-group">
+                                            <label >举办人或者举办单位：</label><br/>
+                                            <input type="text" class="form-control" value="" name="organizer" id="organizer1" placeholder="请选择开始时间" >
+                                        </div>
+                                        <div class="form-group">
+                                            <label >科目时间：</label><br/>
+                                            <input type="text" class="form-control" value="" name="subjectTimeStart" id="subjectTimeStart1" placeholder="请选择开始时间" style="width: 40%;display: inline">------<input type="text" class="form-control" value="" name="subjectTimeEnd" id="subjectTimeEnd1" placeholder="请选择结束时间" style="width: 40%;display: inline">
+                                        </div>
+                                        <input type="hidden" name="numberNow" id="numberNow" value="0">
+                                        <input type="hidden" name="state" id="state1" value="Waiting">
+                                        <div class="form-group">
+                                            <label >比赛时间：</label><br/>
+                                            <input type="text" class="form-control" value="" name="matchTimeStart" id="matchTimeStart1" placeholder="请选择开始时间" style="width: 40%;display: inline">------<input type="text" class="form-control" value="" name="matchTimeEnd" id="matchTimeEnd1" placeholder="请选择结束时间" style="width: 40%;display: inline">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                            <button type="submit" class="btn btn-primary" id="add">新增</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- .animated -->
+        </div><!-- .content -->
+                </div>
+            </div><!-- .animated -->
+        </div>
+        <!-- /.content -->
+        <div class="clearfix"></div>
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div>
+                <div style="text-align: center">
+                    显示
+                    <span class="num1" th:if="${page.size}>=10">10</span>
+                    <span class="num1" th:if="${page.size}<10" th:text="${page.size}"></span>
+                    条记录，共<span class="num1" th:text="${page.total}"></span>条记录
+                </div>
+                <div style="text-align: center;">
+                    <ul class="pagination">
+                        <li><a th:href="@{/match(category=${category},subject=${subject},PageNum=1)}">首页</a></li>
+                        <li><a th:href="@{/match(category=${category},subject=${subject},PageNum=${page.prePage})}" th:onclick="Jump(${page.prePage})" th:if="${page.isFirstPage}==false">&lt;上一页</a></li>
+                        <li th:each="navigatepageNum : ${page.navigatepageNums}">
+                            <a th:value="${navigatepageNum}" th:text="${navigatepageNum}" th:href="@{/match(category=${category},subject=${subject},PageNum=${navigatepageNum})}"></a>
+                        </li>
+                        <li><a th:href="@{/match(category=${category},subject=${subject},PageNum=${page.nextPage})}" th:if="${page.isLastPage}==false">下一页&gt;</a></li>
+                        <li><a th:href="@{/match(category=${category},subject=${subject},PageNum=${page.pages})}">末页</a></li>
+                    </ul>
+                </div>
+                <!-- <span><input type="text" class="ipt" value="" id="_page_input_num" #if($pages == 0)disabled#end/></span>
+                  <span><input type="button" value="跳转" class="sure" id="Jump"  #if($pages == 0)disabled#end/></span>-->
+            </div>
+        </footer>
+        <!-- /.site-footer -->
+    </div>
+    <!-- /#right-panel -->
+
+    <!-- Scripts -->
+    <script src="webjars/jquery/1.12.1/jquery.min.js"></script>
+    <script src="../static/js/popper.min.js"></script>
+    <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../static/js/jquery.matchHeight.min.js"></script>
+    <script src="../static/js/laydate/laydate.js"></script>
+    <script src="../static/js/BackstageMatch.js"></script>
+</body>
+</html>

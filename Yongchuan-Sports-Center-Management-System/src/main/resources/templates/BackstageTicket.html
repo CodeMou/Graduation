@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ela Admin - HTML5 Admin Template</title>
+    <meta name="description" content="Ela Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/css/normalize.css">
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/themify-icons.css">
+    <link rel="stylesheet" href="../static/css/pe-icon-7-filled.css">
+    <link rel="stylesheet" href="../static/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../static/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../static/css/chartist.min.css" rel="stylesheet">
+    <link href="../static/css/jqvmap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+<aside id="left-panel" class="left-panel" th:replace="/BackCommon/panel::left-panel"></aside>
+<div id="right-panel" class="right-panel" th:replace="/BackCommon/panel::right-panel"></div>
+        <!-- Breadcrumbs-->
+        <div class="breadcrumbs">
+            <div class="breadcrumbs-inner">
+                <div class="row m-0">
+                    <div class="col-sm-4">
+                        <div class="page-header float-left">
+                            <div class="page-title">
+                                <h1>票务管理</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="animated fadeIn">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div>
+                                    <table style="text-align: center" class="table">
+                                        <tr><td>类别:</td><td><a th:href="@{/BackstageTicket(type='Music',subtype='')}">音乐会</a></td><td><a th:href="@{/BackstageTicket(type='Theatre',subtype='')}">戏剧</a></td><td><a th:href="@{/BackstageTicket(type='Concert',subtype='')}">演唱会</a></td><td><a th:href="@{/BackstageTicket(type='Dance',subtype='')}">舞蹈</a></td><td><a th:href="@{/BackstageTicket(type='TraditionalOpera',subtype='')}">戏曲</a></td><td><a th:href="@{/BackstageTicket(type='Sports',subtype='')}">体育</a></td><td><a th:href="@{/BackstageTicket(type='Acrobatics',subtype='')}">杂技</a></td></tr>
+                                        <tr th:if="${type}=='Music'"><td>子类：</td><td><a th:href="@{/BackstageTicket(type='Music',subtype='Chorus')}">声乐及合唱</a></td><td><a th:href="@{/BackstageTicket(type='Music',subtype='AncientMusic')}">室内乐及古乐</a></td><td><a th:href="@{/BackstageTicket(type='Music',subtype='Solo')}">独奏</a></td><td><a th:href="@{/BackstageTicket(type='Music',subtype='Other')}">其他</a></td></tr>
+                                        <tr th:if="${type}=='Theatre'"><td>子类：</td><td><a th:href="@{/BackstageTicket(type='Theatre',subtype='Drama')}">话剧</a></td><td><a th:href="@{/BackstageTicket(type='Theatre',subtype='Opera')}">歌剧</a></td><td><a th:href="@{/BackstageTicket(type='Theatre',subtype='TheLivingTheatre')}">舞台剧</a></td><td><a th:href="@{/BackstageTicket(type='Theatre',subtype='Other')}">其他</a></td></tr>
+                                        <tr th:if="${type}=='Concert'"><td>子类：</td><td><a th:href="@{/BackstageTicket(type='Concert',subtype='Rock')}">摇滚</a></td><td><a th:href="@{/BackstageTicket(type='Concert',subtype='Nation')}">民族</a></td><td><a th:href="@{/BackstageTicket(type='Concert',subtype='Popular')}">流行</a></td><td><a th:href="@{/BackstageTicket(type='Concert',subtype='Festival')}">音乐节</a></td><td><a th:href="@{/BackstageTicket(type='Concert',subtype='Sir')}">爵士</a></td><td><a th:href="@{/BackstageTicket(type='Concert',subtype='Other')}">其他</a></td></tr>
+                                        <tr th:if="${type}=='Dance'"><td>子类：</td><td><a th:href="@{/BackstageTicket(type='Dance',subtype='LatinDance')}">拉丁舞</a></td><td><a th:href="@{/BackstageTicket(type='Dance',subtype='ModernDance')}">现代舞</a></td><td><a th:href="@{/BackstageTicket(type='Dance',subtype='FolkDance')}">民族舞</a></td><td><a th:href="@{/BackstageTicket(type='Dance',subtype='Ballet')}">芭蕾舞</a></td><td><a th:href="@{/BackstageTicket(type='Dance',subtype='Jazz')}">爵士舞</a></td><td><a th:href="@{/BackstageTicket(type='Dance',subtype='ModernDancing')}">摩登舞</a></td><td><a th:href="@{/BackstageTicket(type='Dance',subtype='Other')}">其他</a></td></tr>
+                                        <tr th:if="${type}=='TraditionalOpera'"><td>子类：</td><td><a th:href="@{/BackstageTicket(type='TraditionalOpera',subtype='BeijingOpera')}">京剧</a></td><td><a th:href="@{/BackstageTicket(type='TraditionalOpera',subtype='ShaoxingOpera')}">越剧</a></td><td><a th:href="@{/BackstageTicket(type='TraditionalOpera',subtype='Huangmeixi')}">黄梅戏</a></td><td><a th:href="@{/BackstageTicket(type='TraditionalOpera',subtype='PingJuOpera')}">评剧</a></td><td><a th:href="@{/BackstageTicket(type='TraditionalOpera',subtype='HenanOpera')}">豫剧</a></td><td><a th:href="@{/BackstageTicket(type='TraditionalOpera',subtype='Other')}">其他</a></td></tr>
+                                        <tr th:if="${type}=='Sports'"><td>子类：</td><td><a th:href="@{/BackstageTicket(type='Sports',subtype='Football')}">足球</a></td><td><a th:href="@{/BackstageTicket(type='Sports',subtype='Basketball')}">篮球</a></td><td><a th:href="@{/BackstageTicket(type='Sports',subtype='TableTennis')}">乒乓球</a></td><td><a th:href="@{/BackstageTicket(type='Sports',subtype='Swimming')}">游泳</a></td><td><a th:href="@{/BackstageTicket(type='Sports',subtype='Bodybuilding')}">健身</a></td><td><a th:href="@{/BackstageTicket(type='Sports',subtype='Badminton')}">羽毛球</a></td><td><a th:href="@{/BackstageTicket(type='Sports',subtype='Athletics')}">田径</a></td><td><a th:href="@{/BackstageTicket(type='Sports',subtype='Tennis')}">网球</a></td><td><a th:href="@{/BackstageTicket(type='Sports',subtype='Shotput')}">铅球</a></td><td><a th:href="@{/BackstageTicket(type='Sports',subtype='Other')}">其他</a></td></tr>
+                                        <tr th:if="${type}=='Acrobatics'"><td>子类：</td><td><a th:href="@{/BackstageTicket(type='Acrobatics',subtype='Acrobatics')}">器械杂技</a></td><td><a th:href="@{/BackstageTicket(type='Acrobatics',subtype='BodyAcrobatics')}">形体杂技</a></td><td><a th:href="@{/BackstageTicket(type='Acrobatics',subtype='AerialAcrobatics')}">高空杂技</a></td><td><a th:href="@{/BackstageTicket(type='Acrobatics',subtype='OralSkills')}">口技</a></td><td><a th:href="@{/BackstageTicket(type='Acrobatics',subtype='Other')}">其他</a></td></tr>
+                                    </table>
+                                </div>
+                                <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                                    <thead>
+                                    <tr style="white-space:nowrap;">
+                                        <th><input type="checkbox" name="allSel">全选</th>
+                                        <th>标题</th>
+                                        <th>地址</th>
+                                        <th>详细地址</th>
+                                        <th>演出开始时间</th>
+                                        <th>演出结束时间</th>
+                                        <th>星期几</th>
+                                        <th>票价或票价区间</th>
+                                        <th>总票数</th>
+                                        <th>剩余票数</th>
+                                        <th>售票情况</th>
+                                        <th>其他操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="ticket : ${Tickets}">
+                                        <td><input type="checkbox" name="select"></td>
+                                        <td th:text="${ticket.id}" style="display: none"></td>
+                                        <td th:text="${ticket.title}"></td>
+                                        <td th:text="${ticket.address}"></td>
+                                        <td th:text="${ticket.detailedAddress}"></td>
+                                        <td th:text="${#dates.format(ticket.showTimeStart,'yyyy/MM/dd HH:MM')}"></td>
+                                        <td th:text="${#dates.format(ticket.showTimeEnd,'yyyy/MM/dd HH:MM')}"></td>
+                                        <td th:text="星期一" th:if="${ticket.week=='Monday'}"></td>
+                                        <td th:text="星期二" th:if="${ticket.week=='Tuesday'}"></td>
+                                        <td th:text="星期三" th:if="${ticket.week=='Wednesday'}"></td>
+                                        <td th:text="星期四" th:if="${ticket.week=='Thursday'}"></td>
+                                        <td th:text="星期五" th:if="${ticket.week=='Friday'}"></td>
+                                        <td th:text="星期六" th:if="${ticket.week=='Saturday'}"></td>
+                                        <td th:text="星期天" th:if="${ticket.week=='Sunday'}"></td>
+                                        <td th:if="${#strings.isEmpty(ticket.week)}"></td>
+                                        <td th:text="${ticket.price}"></td>
+                                        <td th:text="${ticket.number}"></td>
+                                        <td th:text="${ticket.numberSurplus}"></td>
+                                        <td th:text="已售完" th:if="${ticket.state=='ending'}"></td>
+                                        <td th:text="售票中" th:if="${ticket.state=='Ticketing'}"></td>
+                                        <td th:text="待售" th:if="${ticket.state=='Waiting'}"></td>
+                                        <td><button type="button" th:text="编辑" class="btn btn-default edit" style="float: left"></button><button type="button" th:text="删除" class="delete btn btn-default" style="float: left"></button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-default" id="addShow" th:text="新增演出"></button>
+                    <button type="button" class="btn btn-default" id="deletes" th:text="批量删除"></button>
+                    <button type="button" class="btn btn-default" id="start" th:text="开始售票"></button>
+                    <div class="modal fade" id="empUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">更改演出</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <input type="hidden" class="form-control" name="id" id="id" >
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="title">标题</label>
+                                            <input type="text" class="form-control" value="" name="Title" id="title" placeholder="请输入标题">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="poster">海报</label>
+                                            <input type="text" class="form-control" value="" name="poster" id="poster" placeholder="请输入标题">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="address">地址</label>
+                                            <input type="text" class="form-control" value="" name="Address" id="address" placeholder="请输入地址">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="detailedAddress">详细地址</label>
+                                            <input type="text" class="form-control" value="" name="DetailedAddress" id="detailedAddress" placeholder="请输入详细地址">
+                                        </div>
+                                        <div class="form-group">
+                                            <label >请选择演出时间：</label><br/>
+                                            <input type="text" class="form-control" value="" name="showTimeStart" id="showTimeStart" placeholder="请选择开始时间" style="width: 40%;display: inline">------<input type="text" class="form-control" value="" name="showTimeEnd" id="showTimeEnd" placeholder="请选择结束时间" style="width: 40%;display: inline">
+                                        </div>
+                                        <div class="form-group">
+                                            <label >星期几：</label><br/>
+                                            <select id="week" name="week">
+                                                <option value="">---请选择---</option>
+                                                <option value="Monday">星期一</option>
+                                                <option value="Tuesday">星期二</option>
+                                                <option value="Wednesday">星期三</option>
+                                                <option value="Thursday">星期四</option>
+                                                <option value="Friday">星期五</option>
+                                                <option value="Saturday">星期六</option>
+                                                <option value="Sunday">星期天</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label >请选择演出种类：</label><br/>
+                                            <select id="type" name="type">
+                                                <option value="Music">音乐会</option>
+                                                <option value="Theatre">戏剧</option>
+                                                <option value="Concert">演唱会</option>
+                                                <option value="Dance">舞蹈</option>
+                                                <option value="TraditionalOpera">戏曲</option>
+                                                <option value="Sports">体育</option>
+                                                <option value="Acrobatics">杂技</option>
+                                            </select>
+                                            <input type="hidden" id="inSub">
+                                            <select id="subtype" name="subtype"></select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label >请选择票价或者票价区间：</label><br/>
+                                            <input type="text" class="form-control" value="" name="price" id="price" placeholder="请输入票价或者票价区间" style="width: 40%;display: inline">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="number">总票数</label>
+                                            <input type="text" class="form-control" value="" name="number" id="number" placeholder="请输入总票数">
+                                        </div>
+                                        <div class="form-group">
+                                            <label >请设置分区价格：</label><br/>
+                                            <input type="text" class="form-control" value="" name="aArea" id="aArea" placeholder="请设置A区的金额" style="width: 40%;display: inline">------<input type="text" class="form-control" value="" name="bArea" id="bArea" placeholder="请设置B区的金额" style="width: 40%;display: inline;margin-top: 10px">
+                                            <input type="text" class="form-control" value="" name="cArea" id="cArea" placeholder="请设置C区的金额" style="width: 40%;display: inline">------<input type="text" class="form-control" value="" name="dArea" id="dArea" placeholder="请设置D区的金额" style="width: 40%;display: inline;margin-top: 10px">
+                                            <input type="text" class="form-control" value="" name="eArea" id="eArea" placeholder="请设置E区的金额" style="width: 40%;display: inline">------<input type="text" class="form-control" value="" name="fArea" id="fArea" placeholder="请设置F区的金额" style="width: 40%;display: inline;margin-top: 10px">
+                                        </div>
+                                        <input type="hidden" name="state" id="state">
+                                        <div class="form-group">
+                                            <label class="lab">说明：</label><br/>
+                                                <textarea name="explain" id="explain" class="textarea" rows="3" cols="50" value=""style="margin-left: 10%"></textarea>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                            <button type="submit" class="btn btn-primary" id="update">更改</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="empUpdateModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">新增演出</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <input type="hidden" class="form-control" name="id" id="id1" >
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="title">标题</label>
+                                            <input type="text" class="form-control" value="" name="Title" id="title1" placeholder="请输入标题">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="poster">海报</label>
+                                            <input class="form-control" placeholder="请选择文件" type="file" name="file"/>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="address">地址</label>
+                                            <input type="text" class="form-control" value="重庆" name="Address" id="address1" placeholder="请输入地址">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="detailedAddress">详细地址</label>
+                                            <input type="text" class="form-control" value="永川体育中心" name="DetailedAddress" id="detailedAddress1" placeholder="请输入详细地址">
+                                        </div>
+                                        <div class="form-group">
+                                            <label >请选择演出时间：</label><br/>
+                                            <input type="text" class="form-control" value="" name="showTimeStart" id="showTimeStart1" placeholder="请选择开始时间" style="width: 40%;display: inline">------<input type="text" class="form-control" value="" name="showTimeEnd" id="showTimeEnd1" placeholder="请选择结束时间" style="width: 40%;display: inline">
+                                        </div>
+                                        <div class="form-group">
+                                            <label >星期几：</label><br/>
+                                            <select id="week1" name="week">
+                                                <option value="">---请选择---</option>
+                                                <option value="Monday">星期一</option>
+                                                <option value="Tuesday">星期二</option>
+                                                <option value="Wednesday">星期三</option>
+                                                <option value="Thursday">星期四</option>
+                                                <option value="Friday">星期五</option>
+                                                <option value="Saturday">星期六</option>
+                                                <option value="Sunday">星期天</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label >请选择演出种类：</label><br/>
+                                            <select id="type1" name="type">
+                                                <option value="Music">音乐会</option>
+                                                <option value="Theatre">戏剧</option>
+                                                <option value="Concert">演唱会</option>
+                                                <option value="Dance">舞蹈</option>
+                                                <option value="TraditionalOpera">戏曲</option>
+                                                <option value="Sports">体育</option>
+                                                <option value="Acrobatics">杂技</option>
+                                            </select>
+                                            <select id="subtype1" name="subtype"></select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label >请选择票价或者票价区间：</label><br/>
+                                            <input type="text" class="form-control" value="" name="price" id="price1" placeholder="请输入票价或者票价区间" style="width: 40%;display: inline">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="number">总票数</label>
+                                            <input type="text" class="form-control" value="" name="number" id="number1" placeholder="请输入总票数">
+                                        </div>
+                                        <div class="form-group">
+                                            <label >请设置分区价格：</label><br/>
+                                            <input type="text" class="form-control" value="" name="aArea" id="aArea1" placeholder="请设置A区的金额" style="width: 40%;display: inline">------<input type="text" class="form-control" value="" name="bArea" id="bArea1" placeholder="请设置B区的金额" style="width: 40%;display: inline;margin-top: 10px">
+                                            <input type="text" class="form-control" value="" name="cArea" id="cArea1" placeholder="请设置C区的金额" style="width: 40%;display: inline">------<input type="text" class="form-control" value="" name="dArea" id="dArea1" placeholder="请设置D区的金额" style="width: 40%;display: inline;margin-top: 10px">
+                                            <input type="text" class="form-control" value="" name="eArea" id="eArea1" placeholder="请设置E区的金额" style="width: 40%;display: inline">------<input type="text" class="form-control" value="" name="fArea" id="fArea1" placeholder="请设置F区的金额" style="width: 40%;display: inline;margin-top: 10px">
+                                        </div>
+                                        <input type="hidden" name="state" id="state1" value="Waiting">
+                                        <input type="hidden" name="numberSurplus" id="numberSurplus">
+                                        <div class="form-group">
+                                            <label class="lab">说明：</label><br/>
+                                                <textarea name="explain" id="explain1" class="textarea" rows="3" cols="50" value=""style="margin-left: 10%"></textarea>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                            <button type="submit" class="btn btn-primary" id="add">新增</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- .animated -->
+        </div><!-- .content -->
+                </div>
+            </div><!-- .animated -->
+        </div>
+        <!-- /.content -->
+        <div class="clearfix"></div>
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div>
+                <div style="text-align: center">
+                    显示
+                    <span class="num1" th:if="${page.size}>=10">10</span>
+                    <span class="num1" th:if="${page.size}<10" th:text="${page.size}"></span>
+                    条记录，共<span class="num1" th:text="${page.total}"></span>条记录
+                </div>
+                <div style="text-align: center;">
+                    <ul class="pagination">
+                        <li><a th:href="@{/BackstageTicket(type=${type},subtype=${subtype},PageNum=1)}">首页</a></li>
+                        <li><a th:href="@{/BackstageTicket(type=${type},subtype=${subtype},PageNum=${page.prePage})}" th:onclick="Jump(${page.prePage})" th:if="${page.isFirstPage}==false">&lt;上一页</a></li>
+                        <li th:each="navigatepageNum : ${page.navigatepageNums}">
+                            <a th:value="${navigatepageNum}" th:text="${navigatepageNum}" th:href="@{/BackstageTicket(type=${type},subtype=${subtype},PageNum=${navigatepageNum})}"></a>
+                        </li>
+                        <li><a th:href="@{/BackstageTicket(type=${type},subtype=${subtype},PageNum=${page.nextPage})}" th:if="${page.isLastPage}==false">下一页&gt;</a></li>
+                        <li><a th:href="@{/BackstageTicket(type=${type},subtype=${subtype},PageNum=${page.pages})}">末页</a></li>
+                    </ul>
+                </div>
+                <!-- <span><input type="text" class="ipt" value="" id="_page_input_num" #if($pages == 0)disabled#end/></span>
+                  <span><input type="button" value="跳转" class="sure" id="Jump"  #if($pages == 0)disabled#end/></span>-->
+            </div>
+        </footer>
+        <!-- /.site-footer -->
+    </div>
+    <!-- /#right-panel -->
+
+    <!-- Scripts -->
+    <script src="webjars/jquery/1.12.1/jquery.min.js"></script>
+    <script src="../static/js/popper.min.js"></script>
+    <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../static/js/jquery.matchHeight.min.js"></script>
+    <script src="../static/js/laydate/laydate.js"></script>
+    <script src="../static/js/BackTicket.js"></script>
+</body>
+</html>

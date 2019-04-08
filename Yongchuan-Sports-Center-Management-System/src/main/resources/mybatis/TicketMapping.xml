@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqwu.graduation.mapper.TicketMapping">
+	<!-- 查询所有数据 -->
+	<select id="ticketSelectAll" resultType="com.cqwu.graduation.bean.Ticket">
+		select * from `show`
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="type != null and type != ''">
+				and type = #{type}
+			</if>
+			<if test="subtype !=null and subtype != ''">
+				and subtype = #{subtype}
+			</if>
+		</where>
+	</select>
+	<!-- 获取自增主键的值采用useGeneratedkey属性和keyProperty属性 -->
+	<insert id="ticketAdd" parameterType="com.cqwu.graduation.bean.Ticket" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO `show` (id, title, `explain`, poster, `type`, subtype, address, detailed_address, show_time_start, show_time_end,week,price,state,number_surplus,number,a_area,b_area,c_area,d_area,e_area,f_area, raw_add_time, raw_update_time) VALUES (null, #{title}, #{explain}, #{poster}, #{type},  #{subtype} ,#{address}, #{detailedAddress}, #{showTimeStart}, #{showTimeEnd},  #{week},  #{price},  #{state},  #{numberSurplus},#{number},#{aArea},#{bArea},#{cArea},#{dArea},#{eArea},#{fArea},now(),now());
+	</insert>
+	<!-- 修改指定票价信息 -->
+	<update id="ticketUpdate">
+		update `show`
+		set title = #{title}, `explain` = #{explain}, poster = #{poster}, `type` = #{type}, subtype = #{subtype},
+		address = #{address}, detailed_address = #{detailedAddress}, show_time_start = #{showTimeStart},
+		show_time_end = #{showTimeEnd}, week = #{week}, price = #{price}, state = #{state}, number_surplus = #{numberSurplus},
+		a_area = #{aArea},b_area = #{bArea},c_area = #{cArea},d_area = #{dArea},e_area = #{eArea},f_area = #{fArea},
+		number = #{number} where id = #{id}
+	</update>
+	<update id="ticketUpdateState">
+		update `show`
+		set state = #{state} where id = #{id}
+	</update>
+	<!-- 删除指定用户信息 -->
+	<delete id="ticketDelete">
+		delete from `show` where id = #{id}
+	</delete>
+</mapper>

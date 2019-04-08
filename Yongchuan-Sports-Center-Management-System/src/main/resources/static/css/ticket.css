@@ -1,0 +1,126 @@
+a, a:hover, a:active, a:link, a:visited{
+    text-decoration: none;
+    color: #000;
+}
+li{
+    list-style: none;
+}
+.fa, em{
+    color: #12c0dc;
+    padding: 0 10px;
+}
+.container{
+    padding-top: 30px;
+}
+.search {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+dl.Categories, dl.Small_class  {
+    border-bottom: 1px dashed #bcbbbb;
+    height: 35px;
+}
+dt.left, .Categories .all, .Small_class .all {
+    float: left;
+    width: 10%;
+    line-height: 31px;
+    color: #968788;
+    text-align: right;
+    margin-right: 18px;
+}
+.Categories .all, .Small_class .all{
+    width: 7%;
+}
+.Categories .all a, .Small_class .all a {
+    height: 26px;
+    line-height: 26px;
+    padding: 0 8px;
+    white-space: nowrap;
+}
+.Small_class .right{
+    float: left;
+    width: 75%;
+}
+.right ul li {
+    list-style: none;
+    float: left;
+    padding: 5px 10px;
+    margin: 0 5px;
+}
+.right ul li:hover{
+    background: #12c0dc;
+    border-radius: 5px;
+}
+.right ul li:hover a {
+    color: #fff !important;
+}
+.this{
+    color: #fff !important;
+    background: #12c0dc;
+    border-radius: 5px;
+}
+.this a{
+    color: #fff;
+}
+.ticket {
+    height: 100%;
+    border: 1px solid #ddd;
+    margin: 20px 0;
+}
+.ticket ul{
+    padding: 0 20px;
+}
+.ticket ul li .search_img {
+    border-bottom: 1px dashed #ddd;
+    height: 195px;
+    padding: 20px;
+    position: relative;
+}
+.ticket ul li .search_img img, .modal-body img {
+    width: 115px;
+    height: 155px;
+    position: absolute;
+    left: 25px;
+}
+.ticket ul li .search_img .info, .modal-body .info{
+    text-align: left;
+    position: absolute;
+    left: 170px;
+    right: 25px;
+}
+.ticket ul li .search_img .info h3, .modal-body .info h3{
+    margin-top: 10px;
+}
+span.badge.green {
+    background: #12c0dc;
+}
+span.badge.red {
+    background: #ff65ac;
+}
+.gp_btn{
+    text-align: right;
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+}
+.check_num{
+    float: right;
+    padding: 5px 10px;
+}
+input.text {
+    width: 30px;
+    text-align: center;
+}
+h3.zongjia {
+    position: absolute;
+    bottom: 10px;
+    left: 222px;
+}
+.right ul li {
+    list-style: none;
+    float: left;
+    margin: 0 5px;
+}
+.right ul li a{
+    padding: 5px;
+}

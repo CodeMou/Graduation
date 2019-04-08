@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ela Admin - HTML5 Admin Template</title>
+    <meta name="description" content="Ela Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/css/normalize.css">
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/themify-icons.css">
+    <link rel="stylesheet" href="../static/css/pe-icon-7-filled.css">
+    <link rel="stylesheet" href="../static/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../static/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="../static/css/chartist.min.css" rel="stylesheet">
+    <link href="../static/css/jqvmap.min.css" rel="stylesheet">
+</head>
+
+<body>
+<aside id="left-panel" class="left-panel" th:replace="/BackCommon/panel::left-panel"></aside>
+<div id="right-panel" class="right-panel" th:replace="/BackCommon/panel::right-panel"></div>
+        <!-- Breadcrumbs-->
+        <div class="breadcrumbs">
+            <div class="breadcrumbs-inner">
+                <div class="row m-0">
+                    <div class="col-sm-4">
+                        <div class="page-header float-left">
+                            <div class="page-title">
+                                <h1>培训管理</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="animated fadeIn">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div>
+                                    <table style="text-align: center" class="table">
+                                        <tr><td>类别：</td><td><a th:href="@{/train(subject='Football')}">足球</a></td><td><a th:href="@{/train(subject='Basketball')}">篮球</a></td><td><a th:href="@{/train(subject='TableTennis')}">乒乓球</a></td><td><a th:href="@{/train(subject='Swimming')}">游泳</a></td><td><a th:href="@{/train(subject='Bodybuilding')}">健身</a></td><td><a th:href="@{/train(subject='Badminton')}">羽毛球</a></td><td><a th:href="@{/train(subject='Athletics')}">田径</a></td><td><a th:href="@{/train(subject='Tennis')}">网球</a></td><td><a th:href="@{/train(subject='Shotput')}">铅球</a></td><td><a th:href="@{/train(subject='Other')}">其他</a></td></tr>
+                                    </table>
+                                </div>
+                                <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                                    <thead>
+                                    <tr  style="white-space:nowrap;text-align: center">
+                                        <th><input type="checkbox" name="allSel">全选</th>
+                                        <th>id</th>
+                                        <th>培训科目</th>
+                                        <th>培训老师</th>
+                                        <th>总名额</th>
+                                        <th>剩余名额</th>
+                                        <th>状态</th>
+                                        <th>总课时</th>
+                                        <th>课时时间（单位：分钟）</th>
+                                        <th>每日课时</th>
+                                        <th>开始时间</th>
+                                        <th>其他操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="train : ${trains}">
+                                        <td><input type="checkbox" name="select"></td>
+                                        <td th:text="${train.id}"></td>
+                                        <td th:if="${train.subject=='Football'}">足球</td>
+                                        <td th:if="${train.subject=='Basketball'}">篮球</td>
+                                        <td th:if="${train.subject=='TableTennis'}">乒乓球</td>
+                                        <td th:if="${train.subject=='Swimming'}">游泳</td>
+                                        <td th:if="${train.subject=='Bodybuilding'}">健身</td>
+                                        <td th:if="${train.subject=='Badminton'}">羽毛球</td>
+                                        <td th:if="${train.subject=='Athletics'}">田径</td>
+                                        <td th:if="${train.subject=='Tennis'}">网球</td>
+                                        <td th:if="${train.subject=='Shotput'}">铅球</td>
+                                        <td th:if="${train.subject=='Other'}">其他</td>
+                                        <td th:text="${train.teacher}"></td>
+                                        <td th:text="${train.quota}"></td>
+                                        <td th:text="${train.surplus}"></td>
+                                        <td th:if="${train.state=='Waiting'}">报名未开始</td>
+                                        <td th:if="${train.state=='Enrolment'}">报名中</td>
+                                        <td th:if="${train.state=='ending'}">人员已满</td>
+                                        <td th:text="${train.totalHours}"></td>
+                                        <td th:text="${train.hours}"></td>
+                                        <td th:text="${train.everydayHours}"></td>
+                                        <td th:text="${#dates.format(train.startTime,'yyyy/MM/dd HH:MM')}"></td>
+                                        <td><button type="button" th:text="编辑" class="btn btn-default edit" style="float: left"></button><button type="button" th:text="删除" class="delete btn btn-default" style="float: left"></button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-default" id="addTrain" th:text="新增培训"></button>
+                    <button type="button" class="btn btn-default" id="deletes" th:text="批量删除"></button>
+                    <button type="button" class="btn btn-default" id="start" th:text="开始报名"></button>
+                    <div class="modal fade" id="empUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">更改培训</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <input type="hidden" class="form-control" name="id" id="id" >
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="subject">培训科目：</label>
+                                            <select id="subject" name="subject">
+                                                <option value="Football">足球</option>
+                                                <option value="Basketball">篮球</option>
+                                                <option value="TableTennis">乒乓球</option>
+                                                <option value="Swimming">游泳</option>
+                                                <option value="Bodybuilding">健身</option>
+                                                <option value="Badminton">羽毛球</option>
+                                                <option value="Athletics">田径</option>
+                                                <option value="Tennis">网球</option>
+                                                <option value="Shotput">铅球</option>
+                                                <option value="Other">其他</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="teacher">培训老师：</label>
+                                            <input type="text" class="form-control" value="" name="teacher" id="teacher" placeholder="请输入培训老师">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="quota">总名额</label>
+                                            <input type="text" class="form-control" value="" name="quota" id="quota" placeholder="请输入总名额">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="totalHours">总课时：</label><br/>
+                                            <input type="text" class="form-control" value="" name="totalHours" id="totalHours" placeholder="请输入总课时">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="hours">课时时间：</label>
+                                            <input type="text" class="form-control" value="" name="hours" id="hours" placeholder="请输入课时时间">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="everydayHours">每日课时：</label>
+                                            <input type="text" class="form-control" value="" name="everydayHours" id="everydayHours" placeholder="请输入每日课时">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="startTime">开始时间：</label>
+                                            <input type="text" class="form-control" value="" name="startTime" id="startTime" placeholder="请输入开始时间">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="lab">说明：</label><br/>
+                                                <textarea name="description" id="description" class="textarea" rows="3" cols="50" value=""style="margin-left: 10%"></textarea>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                            <button type="submit" class="btn btn-primary" id="update">更改</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="empUpdateModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">新增培训</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <input type="hidden" class="form-control" name="id" id="id1" >
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="subject">培训科目：</label>
+                                            <select id="subject1" name="subject">
+                                                <option value="Football">足球</option>
+                                                <option value="Basketball">篮球</option>
+                                                <option value="TableTennis">乒乓球</option>
+                                                <option value="Swimming">游泳</option>
+                                                <option value="Bodybuilding">健身</option>
+                                                <option value="Badminton">羽毛球</option>
+                                                <option value="Athletics">田径</option>
+                                                <option value="Tennis">网球</option>
+                                                <option value="Shotput">铅球</option>
+                                                <option value="Other">其他</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="teacher">培训老师：</label>
+                                            <input type="text" class="form-control" value="" name="teacher" id="teacher1" placeholder="请输入培训老师">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="quota">总名额</label>
+                                            <input type="text" class="form-control" value="" name="quota" id="quota1" placeholder="请输入总名额">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="totalHours">总课时：</label><br/>
+                                            <input type="text" class="form-control" value="" name="totalHours" id="totalHours1" placeholder="请输入总课时">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="hours">课时时间：</label>
+                                            <input type="text" class="form-control" value="" name="hours" id="hours1" placeholder="请输入课时时间">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="everydayHours">每日课时：</label>
+                                            <input type="text" class="form-control" value="" name="everydayHours" id="everydayHours1" placeholder="请输入每日课时">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="startTime">开始时间：</label>
+                                            <input type="text" class="form-control" value="" name="startTime" id="startTime1" placeholder="请输入开始时间">
+                                        </div>
+                                        <input type="hidden" name="state" id="state1" value="Waiting">
+                                        <input type="hidden" name="surplus" id="surplus">
+                                        <div class="form-group">
+                                            <label class="lab">说明：</label><br/>
+                                            <textarea name="description" id="description1" class="textarea" rows="3" cols="50" value=""style="margin-left: 10%"></textarea>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                            <button type="submit" class="btn btn-primary" id="add">新增</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- .animated -->
+        </div><!-- .content -->
+                </div>
+            </div><!-- .animated -->
+        </div>
+        <!-- /.content -->
+        <div class="clearfix"></div>
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div>
+                <div style="text-align: center">
+                    显示
+                    <span class="num1" th:if="${page.size}>=10">10</span>
+                    <span class="num1" th:if="${page.size}<10" th:text="${page.size}"></span>
+                    条记录，共<span class="num1" th:text="${page.total}"></span>条记录
+                </div>
+                <div style="text-align: center;">
+                    <ul class="pagination">
+                        <li><a th:href="@{/train(subject=${subject},PageNum=1)}">首页</a></li>
+                        <li><a th:href="@{/train(subject=${subject},PageNum=${page.prePage})}" th:onclick="Jump(${page.prePage})" th:if="${page.isFirstPage}==false">&lt;上一页</a></li>
+                        <li th:each="navigatepageNum : ${page.navigatepageNums}">
+                            <a th:value="${navigatepageNum}" th:text="${navigatepageNum}" th:href="@{/train(subject=${subject},PageNum=${navigatepageNum})}"></a>
+                        </li>
+                        <li><a th:href="@{/train(subject=${subject},PageNum=${page.nextPage})}" th:if="${page.isLastPage}==false">下一页&gt;</a></li>
+                        <li><a th:href="@{/train(subject=${subject},PageNum=${page.pages})}">末页</a></li>
+                    </ul>
+                </div>
+                <!-- <span><input type="text" class="ipt" value="" id="_page_input_num" #if($pages == 0)disabled#end/></span>
+                  <span><input type="button" value="跳转" class="sure" id="Jump"  #if($pages == 0)disabled#end/></span>-->
+            </div>
+        </footer>
+        <!-- /.site-footer -->
+    </div>
+    <!-- /#right-panel -->
+
+    <!-- Scripts -->
+    <script src="webjars/jquery/1.12.1/jquery.min.js"></script>
+    <script src="../static/js/popper.min.js"></script>
+    <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../static/js/jquery.matchHeight.min.js"></script>
+    <script src="../static/js/laydate/laydate.js"></script>
+    <script src="../static/js/BackstageTrain.js"></script>
+</body>
+</html>

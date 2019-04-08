@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="webjars/jquery/1.12.1/jquery.min.js"></script>
+    <link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>预约场地</title>
+</head>
+<body>
+<div data-role="page">
+    <div data-role="header">
+        <a th:href="@{/logout}" th:text="注销" th:style="'float:right'"></a>
+        <a th:href="@{/information}"></a>
+        <h5 th:text="'欢迎您！'+${session.username}"></h5>
+    </div>
+    <div data-role="content">
+        <ul class="nav nav-tabs">
+            <li role="presentation"  class="active"><a th:href="@{/index}">预约场地</a></li>
+            <li role="presentation"><a th:href="@{/ticketPurchase}">购票系统</a></li>
+            <li role="presentation"><a th:href="@{/query}">查询系统</a></li>
+            <li role="presentation"><a th:href="@{/Train}">培训报名</a></li>
+            <li role="presentation"><a th:href="@{/Match}">比赛报名</a></li>
+        </ul>
+    </div>
+    <div data-role="footer">
+
+    </div>
+</div>
+</form>
+</body>
+</html>

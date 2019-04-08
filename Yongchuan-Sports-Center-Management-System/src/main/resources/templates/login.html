@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="webjars/jquery/1.12.1/jquery.min.js"></script>
+    <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>登录</title>
+</head>
+<body>
+<div data-role="page">
+    <div data-role="header">
+
+    </div>
+    <div data-role="content">
+        <form th:action="@{/login}" method="post" class="col-md-3">
+            <p th:text="${logout}" th:if="${not #strings.isEmpty(logout)}" th:style="'color:red'"></p>
+            <p th:text="${error}" th:if="${not #strings.isEmpty(error)}" th:style="'color:red'"></p>
+            <div class="form-group">
+                <label for="username">用户名：</label>
+                <input type="text" name="username" th:value="${username}" placeholder="请输入用户名" id="username">
+            </div>
+            <div class="form-group">
+                <label for="password">密&nbsp;&nbsp;&nbsp;码：</label>
+                <input type="text" name="password" placeholder="请输入密码" id="password">
+            </div>
+            <button type="submit" th:text="提交" class="btn btn-default"></button>
+            <a th:href="@{/toRegister}" th:text="注册" class="btn btn-default"></a>
+        </form>
+    </div>
+    <div data-role="footer">
+
+    </div>
+</div>
+</body>
+</html>

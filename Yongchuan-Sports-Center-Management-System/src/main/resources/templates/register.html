@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="webjars/jquery/1.12.1/jquery.min.js"></script>
+    <link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/fileinput.min.css" rel="stylesheet" type="text/css">
+    <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../static/js/register.js"></script>
+    <script src="../static/js/zh.js"></script>
+    <script src="../static/js/fileinput.min.js"></script>
+    <title>注册</title>
+</head>
+<body>
+<div data-role="page">
+    <div data-role="header">
+
+    </div>
+
+    <div data-role="content">
+        <form th:action="@{/register}" method="post">
+            <div class="form-group" style="display: none">
+                <label class="control-label">头像：</label>
+                <input type="text" name="headPortrait" placeholder="请输入用户名" id="headPortrait" value="http://localhost:8080/img/4af33033-183b-4d49-9519-16e651e1a470.jpg">
+            </div>
+            <div class="form-group">
+                <label for="username">用户名：</label>
+                <input type="text" name="username" placeholder="请输入用户名" id="username">
+                <span class="error" style="color: red;display: none" val></span>
+            </div>
+            <div class="form-group">
+                <label for="password">密&nbsp;&nbsp;&nbsp;码：</label>
+                <input type="text" name="password" placeholder="请输入密码" id="password">
+            </div>
+            <div class="form-group">
+                <label for="mobileNo">电话号码：</label>
+                <input type="text" name="mobileNo" placeholder="请输入电话号码" id="mobileNo">
+            </div>
+            <div class="form-group">
+                <label for="idNumber">身份证号码：</label>
+                <input type="text" name="idNumber" placeholder="请输入身份证号码" id="idNumber">
+            </div>
+            <div class="form-group">
+                <label for="t1">验证码：</label>
+                <input id="t1" type="text" name="u" placeholder="验证码"/>
+                <span id="discode"></span>
+                <button type="button" th:text="换一换" class="c btn btn-default"></button>
+            </div>
+            <button type="submit" th:text="提交" class="btn btn-default"></button>
+        </form>
+    </div>
+    <div data-role="footer">
+
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>navigation</title>
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <style>
+        .navbar-header{
+            height: 60px;
+        }
+        .navbar-header .navbar-brand {
+            font-family: STXingkai;
+            color: #fff;
+            font-size: 35px;
+            padding: 0 30px;
+            line-height: 60px;
+        }
+        .navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+            color: #ffffff;
+            background-color: transparent;
+        }
+        .container-fluid {
+            background: #06869b !important;
+        }
+        .navbar-default .navbar-nav>li>a {
+            color: #a5a5a5;
+        }
+        .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+            color: #fff;
+            background-color: transparent;
+            border-bottom: 5px solid #5fb878;
+        }
+        .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+            color: #fff;
+            background: transparent;
+            border-bottom: 5px solid #5fb878;
+        }
+        #nav ul li a{
+            line-height: 60px !important;
+            height: 60px;
+            padding: 0 15px !important;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">永川体育中心管理系统</a>
+        </div>
+        <div class="collapse navbar-collapse" id="nav">
+            <ul class="nav navbar-nav">
+                <li class="active"><a th:href="@{/fieldPage}">预约场地</a></li>
+                <li><a th:href="@{/navigation}">购票系统</a></li>
+                <li><a th:href="@{/trainPage}">培训报名</a></li>
+                <li><a th:href="@{/matchPage}">比赛报名</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" style="margin: 0;color: #fff;border-bottom: none;">
+                        <img th:src="${session.user.headPortrait}" style="border-radius: 50%; width: 40px;margin: 0 10px;"> <span th:text="${session.user.username}"></span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{logout}" style="margin: 0 30px 0 0;color: #fff;border-bottom: none;">注销</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="page">
+            <iframe id="nav_1" th:src="@{/ticketPurchase(type='',subtype='')}" width="100%" height="100%" style="border: none;"></iframe>
+    </div>
+</nav>
+<script src="webjars/jquery/1.12.1/jquery.min.js"></script>
+<script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+    var Page = document.getElementById("page");
+    var Height = window.innerHeight;
+    Page.style.height = Height - 60 + "px";
+    window.onresize = function () {
+        var Page = document.getElementById("page");
+        var Height = window.innerHeight;
+        Page.style.height = Height - 60 + "px";
+    };
+
+    window.onload = function () {
+        var Nav = document.getElementById("nav");
+        var Page = document.getElementById("page");
+        var N_item = Nav.getElementsByTagName("li");
+        var P_item = Page.getElementsByTagName("div");
+        var N_len = N_item.length;
+
+        for (var i = 0; i < N_len; i ++){
+            N_item[i].index = i;
+            N_item[i].onclick = function () {
+                for (var j = 0; j < N_len; j ++){
+                    N_item[j].className = "";
+                    P_item[j].style.display = "none";
+                }
+                this.className = "active";
+                P_item[this.index].style.display = "block";
+            }
+        }
+
+    }
+
+</script>
+</body>
+</html>
