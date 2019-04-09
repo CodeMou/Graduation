@@ -56,22 +56,16 @@ public class TicketController {
 	 */
 	@ResponseBody
 	@PostMapping(value = "/ticketPurchase")
-	public String buy(@RequestParam(value = "transaction")Transaction transaction){
+	public String buy(Transaction transaction) {
 		Integer integer = transactionManager.countTicket(transaction.getPayer(), transaction.getCommodityId());
-		if (integer == 0){
+		if (integer > 3) {
+			return "购票超过4张！请重新购票";
+		} else {
 			Integer insert = transactionManager.insert(transaction);
-			if (insert > 0){
+			if (insert > 0) {
 				return "购票成功！";
-			}else {
+			} else {
 				return "购票失败";
-			}
-		}else {
-			Integer integer1 = transactionManager.updateTicket(transaction.getPayer(), transaction.getCommodityId(),
-					integer + transaction.getNumber());
-			if (integer1 > 0){
-				return "购票成功！";
-			}else {
-				return "购票失败！";
 			}
 		}
 	}

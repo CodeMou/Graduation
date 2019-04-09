@@ -24,7 +24,7 @@ import java.util.List;
  * @since 2019/2/14
  */
 @Service
-@CacheConfig(cacheNames = "ticket")
+//@CacheConfig(cacheNames = "ticket")
 public class TicketManagerImpl implements TicketManager {
 
 	@Autowired
@@ -36,7 +36,7 @@ public class TicketManagerImpl implements TicketManager {
 	 * @return
 	 */
 	@Override
-	@Cacheable
+//	@Cacheable
 	public PageInfo<Ticket> ticketSelectAll(Integer pageNum,String type,String subtype,Integer id) {
 		PageHelper.startPage(pageNum, 10);
 		List<Ticket> list = ticketmapping.ticketSelectAll(type,subtype,id);
@@ -50,7 +50,7 @@ public class TicketManagerImpl implements TicketManager {
 	 * @return
 	 */
 	@Override
-	@CacheEvict(key = "#id",allEntries = true)
+//	@CacheEvict(key = "#id",allEntries = true)
 	public Integer ticketDelete(Integer id) {
 		Integer delete = ticketmapping.ticketDelete(id);
 		return delete;
@@ -62,7 +62,7 @@ public class TicketManagerImpl implements TicketManager {
 	 * @return
 	 */
 	@Override
-	@CacheEvict(key = "#ticket",allEntries = true)
+//	@CacheEvict(key = "#ticket",allEntries = true)
 	public Integer ticketUpdate(Ticket ticket) {
 		Integer update = ticketmapping.ticketUpdate(ticket);
 		return update;
@@ -73,7 +73,7 @@ public class TicketManagerImpl implements TicketManager {
 	 * @return
 	 */
 	@Override
-	@CacheEvict(key = "#id",allEntries = true)
+//	@CacheEvict(key = "#id",allEntries = true)
 	public Integer ticketUpdateState(String state,Integer id) {
 		Integer update = ticketmapping.ticketUpdateState(state,id);
 		return update;
@@ -85,7 +85,7 @@ public class TicketManagerImpl implements TicketManager {
 	 * @return
 	 */
 	@Override
-	@CacheEvict(key = "#ticket",allEntries = true)
+//	@CacheEvict(key = "#ticket",allEntries = true)
 	public Integer ticketAdd(Ticket ticket) {
 		Integer add = ticketmapping.ticketAdd(ticket);
 		return add;

@@ -131,6 +131,7 @@ jQuery(document).ready(function($) {
                 $("#explain").val(result.explain);
                 $("#number").val(result.number);
                 $("#state").val(result.state);
+                $("#poste").attr("src",result.poster);
                 $("#type option[value='"+result.type+"']").attr("selected","selected");
                 $("#subtype").empty();
                 if (result.type == "Music") {
@@ -208,10 +209,16 @@ jQuery(document).ready(function($) {
 
      //更新数据
     $("#update").click(function () {
+        var formData = new FormData($("#empUpdateModal form")[0]);
         $.ajax({
-            url:"/ticket",
-            type:"PUT",
-            data:$("#empUpdateModal form").serialize(),//得到表单里面的值
+            url:"/updateTicket",
+            type:"Post",
+            data:formData,//得到表单里面的值
+            contentType:false,
+            async : false,
+            processData:false,//这个很有必要，不然不行
+            dataType:"json",
+            mimeType:"multipart/form-data",
             success:function(result){
                 alert(result);
                 $("#empUpdateModal").modal("hide");
@@ -232,11 +239,16 @@ jQuery(document).ready(function($) {
     $("#add").click(function () {
         var xx = $("#number1").val();
         $("#numberSurplus").val(xx);
-        var x = $("#numberSurplus").val();
+        var formData = new FormData($("#empUpdateModal1 form")[0]);
         $.ajax({
             url:"/ticket/",
             type:"POST",
-            data:$("#empUpdateModal1 form").serialize(),//得到表单里面的值
+            data:formData,//得到表单里面的值
+            contentType:false,
+            async : false,
+            processData:false,//这个很有必要，不然不行
+            dataType:"json",
+            mimeType:"multipart/form-data",
             success:function(result){
                 alert(result);
                 $("#empUpdateModal").modal("hide");

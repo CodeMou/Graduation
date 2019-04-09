@@ -45,11 +45,16 @@ public class TransactionManagerImpl implements TransactionManager {
 		TransactionExample.Criteria criteria = transactionExample.createCriteria();
 		criteria.andCommodityIdEqualTo(ticketId);
 		criteria.andPayerEqualTo(username);
-		Transaction transaction = transactionMapper.selectByExample(transactionExample).get(0);
-		if (transaction == null){
+		int size = transactionMapper.selectByExample(transactionExample).size();
+		if (size < 1){
 			return 0;
 		}else {
-			return transaction.getNumber();
+			Integer number = 0;
+			List<Transaction> transactions = transactionMapper.selectByExample(transactionExample);
+			for (Transaction transaction : transactions) {
+					number = number+transaction.getNumber();
+			}
+			return number;
 		}
 	}
 
@@ -58,11 +63,15 @@ public class TransactionManagerImpl implements TransactionManager {
 		TransactionExample.Criteria criteria = transactionExample.createCriteria();
 		criteria.andCommodityIdEqualTo(ticketId);
 		criteria.andPayerEqualTo(username);
+		//判断是否超过4张
+		if (number > 4){
+			return null;
+		}
 		//需要改变的对象，将买票的数量进行修改
 		Transaction transaction = new Transaction();
 		transaction.setNumber(number);
-		transactionMapper.updateByExampleSelective(transaction,transactionExample);
-		return null;
+		int i = transactionMapper.updateByExampleSelective(transaction, transactionExample);
+		return i;
 	}
 /*	@Override public List<Transaction> selectByTypeAndSubtype(String payer) {
 		TransactionExample transactionExample = new TransactionExample();

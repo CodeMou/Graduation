@@ -28,7 +28,7 @@ import java.util.List;
  * @since 2019/2/12
  */
 @Service
-@CacheConfig(cacheNames = "users")
+//@CacheConfig(cacheNames = "users")
 public class UserManagerImpl implements UserManager {
 	@Autowired
 	private UserMapping usermapping;
@@ -39,7 +39,7 @@ public class UserManagerImpl implements UserManager {
 	 * @return
 	 */
 	@Override
-	@Cacheable(key = "#root.methodName")
+//	@Cacheable(key = "#root.methodName")
 	public PageInfo<User> selectAll(Integer pageNum) {
 		PageHelper.startPage(pageNum, 10);
 		List<User> users = usermapping.userSelectAll();
@@ -53,7 +53,7 @@ public class UserManagerImpl implements UserManager {
 	 * @return
 	 */
 	@Override
-	@Cacheable(key = "#root.methodName")
+//	@Cacheable(key = "#root.methodName")
 	public PageInfo<User> selectAllAd(Integer pageNum) {
 		PageHelper.startPage(pageNum, 5);
 		List<User> users = usermapping.userSelectAllAd();
@@ -67,7 +67,7 @@ public class UserManagerImpl implements UserManager {
 	 * @return
 	 */
 	@Override
-	@Cacheable(condition = "#username != null and !#username.equals('')")
+//	@Cacheable(condition = "#username != null and !#username.equals('')")
 	public User login(String username) {
 		User user = usermapping.userSelect(username);
 		return user;
@@ -79,7 +79,7 @@ public class UserManagerImpl implements UserManager {
 	 * @return
 	 */
 	@Override
-	@CacheEvict(key = "#username",allEntries = true)
+//	@CacheEvict(key = "#username",allEntries = true)
 	public Integer deleteUser(String username) {
 		Integer integer = usermapping.userDelete(username);
 		return integer;
@@ -91,7 +91,7 @@ public class UserManagerImpl implements UserManager {
 	 * @return
 	 */
 	@Override
-	@CacheEvict(key = "#user",allEntries = true)
+//	@CacheEvict(key = "#user",allEntries = true)
 	public Integer register(User user) {
 		user.setRawAddTime(new Date());
 		Integer integer = usermapping.userAdd(user);
@@ -104,7 +104,7 @@ public class UserManagerImpl implements UserManager {
 	 * @return
 	 */
 	@Override
-	@CacheEvict(key = "#username",allEntries = true)
+//	@CacheEvict(key = "#username",allEntries = true)
 	public Integer updateUser(User user) {
 		user.setRawUpdateTime(new Date());
 		Integer integer = usermapping.userUpdate(user);
@@ -117,7 +117,7 @@ public class UserManagerImpl implements UserManager {
 	 * @return
 	 */
 	@Override
-	@CacheEvict(key = "#user",allEntries = true)
+//	@CacheEvict(key = "#user",allEntries = true)
 	public Integer addUser(User user) {
 		user.setRawAddTime(new Date());
 		Integer integer = usermapping.userAddBoss(user);

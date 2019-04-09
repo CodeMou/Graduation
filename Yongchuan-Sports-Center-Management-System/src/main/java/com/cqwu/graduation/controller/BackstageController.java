@@ -8,8 +8,10 @@ import com.cqwu.graduation.bean.*;
 import com.cqwu.graduation.biz.*;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ClassUtils;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -45,6 +47,8 @@ public class BackstageController {
 	@Autowired
 	private FieldManager fieldManager;
 
+	@Value("${cbs.imagesPath}")
+	private String ImagesPath;
 	/**
 	 * 获取所有普通用户的信息（主页）
 	 *
@@ -87,14 +91,10 @@ public class BackstageController {
 	@GetMapping(value = "/DeleteUser/{username}", produces = "text/html;charset=UTF-8")
 	public String DeleteUser(@PathVariable("username") String username) {
 		Integer deleteResult = userManager.deleteUser(username);
-		try{
-			String path = ResourceUtils.getURL("classpath:").getPath();
-			File file = new File(path+"static/img/"+username);
-			if (file.exists()){
+		//删除文件
+		File file = new File(ImagesPath+username);
+		if (file.exists()){
 				userManager.delFile(file);
-			}
-		}catch (FileNotFoundException ex){
-			ex.printStackTrace();
 		}
 		if (deleteResult > 0) {
 			return "删除成功！";
@@ -112,18 +112,13 @@ public class BackstageController {
 	@GetMapping(value = "/DeleteUsers/{users}", produces = "text/html;charset=UTF-8")
 	public String DeleteUsers(@PathVariable("users") List<String> users) {
 		for (String user : users) {
-			try{
 				Integer deleteResult = userManager.deleteUser(user);
-				String path = ResourceUtils.getURL("classpath:").getPath();
-				File file = new File(path+"static/img/"+user);
+				File file = new File(ImagesPath+user);
 				if (file.exists()){
 					userManager.delFile(file);
 				}else if (deleteResult < 0){
 					return "删除失败，失败账户:"+user;
 				}
-			}catch (FileNotFoundException ex){
-				ex.printStackTrace();
-			}
 		}
 		return "删除成功！";
 	}
@@ -186,16 +181,10 @@ public class BackstageController {
 	public String AddUserBoss(User user) {
 		Integer register = userManager.addUser(user);
 		//注册的同时创建和以用户名为名的文件夹
-		try{
-			String path = ResourceUtils.getURL("classpath:").getPath();
-			File file = new File(path+"static/img/"+user.getUsername());
+			File file = new File(ImagesPath+user.getUsername());
 			if (!file.exists()){
 				file.mkdir();
 			}
-		}catch (FileNotFoundException ex){
-			ex.printStackTrace();
-			return "新增失败，文件夹创建失败！";
-		}
 		if (register > 0) {
 			return "新增成功！";
 		} else {
@@ -238,11 +227,26 @@ public class BackstageController {
 	 * @return
 	 */
 	@ResponseBody
-	@PutMapping(value = "/ticket")
-	public String ticket(Ticket ticket,String Title,String Address,String DetailedAddress) {
-		ticket.setAddress(Address);
-		ticket.setTitle(Title);
-		ticket.setDetailedAddress(DetailedAddress);
+	@PostMapping(value = "/updateTicket")
+	public String ticket(MultipartFile file,Ticket ticket,String Title,String Address,String DetailedAddress) {
+		//重新上传文件并更改信息
+		if(!file.isEmpty()) {
+			// 上传文件路径
+			try {
+				//换名字
+				String oldFileName = file.getOriginalFilename();
+				String newFileName = UUID.randomUUID() + oldFileName.substring(oldFileName.lastIndexOf("."));
+				//获取到路径
+				File newFile = new File(ImagesPath+"showPicture/"+ newFileName);
+				file.transferTo(newFile);
+				ticket.setAddress(Address);
+				ticket.setTitle(Title);
+				ticket.setDetailedAddress(DetailedAddress);
+				ticket.setPoster("http://localhost:8080/images/showPicture/" + newFileName);
+			}catch (IOException e){
+				e.printStackTrace();
+			}
+		}
 		Integer integer = ticketManager.ticketUpdate(ticket);
 		if (integer > 0 ){
 			return "修改成功！";
@@ -316,16 +320,12 @@ public class BackstageController {
 				//换名字
 				String oldFileName = file.getOriginalFilename();
 				String newFileName = UUID.randomUUID() + oldFileName.substring(oldFileName.lastIndexOf("."));
-				//获取到路径
-				String path = ResourceUtils.getURL("classpath:").getPath();
-				File newFile = new File(path + "\\static\\img\\showPicture\\" + newFileName);
+				File newFile = new File(ImagesPath+"showPicture/"+ newFileName);
 				file.transferTo(newFile);
 				ticket.setAddress(Address);
 				ticket.setTitle(Title);
 				ticket.setDetailedAddress(DetailedAddress);
-				ticket.setPoster(path + "\\static\\img\\showPicture\\" + newFileName);
-			}catch (FileNotFoundException ex){
-				ex.printStackTrace();
+				ticket.setPoster("http://localhost:8080/images/showPicture/" + newFileName);
 			}catch (IOException e){
 				e.printStackTrace();
 			}
@@ -647,20 +647,24 @@ public class BackstageController {
 			throws IllegalStateException, IOException {
 		// 原始名称
 		String oldFileName = myfile.getOriginalFilename(); // 获取上传文件的原名
-		//      System.out.println(oldFileName);
-		String path = ResourceUtils.getURL("classpath:").getPath();
 		//获取该用户
 		User user = (User) session.getAttribute("user");
+		//判断文件是否存在,不存在的话创建文件夹
+		String path = ImagesPath+user.getUsername();
+		File file = new File(path);
+		if (!file.exists()){
+			file.mkdirs();
+		}
 		// 上传图片
 		if (myfile != null && oldFileName != null && oldFileName.length() > 0) {
 			// 新的图片名称
 			String newFileName = UUID.randomUUID() + oldFileName.substring(oldFileName.lastIndexOf("."));
 			// 新图片
-			File newFile = new File(path + "\\static\\img\\"+user.getUsername()+"\\" + newFileName);
+			File newFile = new File(path+"/" + newFileName);
 			// 将内存中的数据写入磁盘
 			myfile.transferTo(newFile);
 			//改变数据库中的信息
-			user.setHeadPortrait("http://localhost:8080/img/"+user.getUsername()+"/" + newFileName);
+			user.setHeadPortrait("http://localhost:8080/images/"+user.getUsername()+"/" + newFileName);
 			Integer integer = userManager.updateUser(user);
 			session.setAttribute("user", user);
 			// 将新图片名称返回到前端

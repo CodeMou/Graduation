@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Ela Admin - HTML5 Admin Template</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
+    <meta http-equiv="Content-Type" content="multipart/form-data;charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../static/css/normalize.css">
     <link rel="stylesheet" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -122,8 +123,9 @@
                                             <input type="text" class="form-control" value="" name="Title" id="title" placeholder="请输入标题">
                                         </div>
                                         <div class="form-group">
-                                            <label for="poster">海报</label>
-                                            <input type="text" class="form-control" value="" name="poster" id="poster" placeholder="请输入标题">
+                                            <label for="file">海报</label><br/>
+                                            <img src="" id="poste" height="50%" width="50%">
+                                            <input class="form-control" placeholder="请选择文件" type="file" name="file" id="file"/>
                                         </div>
 
                                         <div class="form-group">
@@ -202,7 +204,7 @@
                                     <h4 class="modal-title">新增演出</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="form-horizontal">
+                                    <form class="form-horizontal" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <input type="hidden" class="form-control" name="id" id="id1" >
                                         </div>
@@ -211,8 +213,8 @@
                                             <input type="text" class="form-control" value="" name="Title" id="title1" placeholder="请输入标题">
                                         </div>
                                         <div class="form-group">
-                                            <label for="poster">海报</label>
-                                            <input class="form-control" placeholder="请选择文件" type="file" name="file"/>
+                                            <label for="file1">海报</label>
+                                            <input class="form-control" placeholder="请选择文件" type="file" name="file" id="file1"/>
                                         </div>
 
                                         <div class="form-group">

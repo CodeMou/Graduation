@@ -73,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, commodity_id, commodity_name, univalence, number, total_price, payer, partition, 
+    id, commodity_id, commodity_name, univalence, `number`, total_price, payer, `partition`,
     raw_add_time, raw_update_time, state
   </sql>
   <select id="selectByExample" parameterType="com.cqwu.graduation.bean.TransactionExample" resultMap="BaseResultMap">
@@ -98,8 +98,8 @@
   </delete>
   <insert id="insert" parameterType="com.cqwu.graduation.bean.Transaction">
     insert into transaction (id, commodity_id, commodity_name, 
-      univalence, number, total_price, 
-      payer, partition, raw_add_time, 
+      univalence, `number`, total_price,
+      payer, `partition`, raw_add_time,
       raw_update_time, state)
     values (#{id,jdbcType=INTEGER}, #{commodityId,jdbcType=INTEGER}, #{commodityName,jdbcType=VARCHAR}, 
       #{univalence,jdbcType=DECIMAL}, #{number,jdbcType=INTEGER}, #{totalPrice,jdbcType=DECIMAL}, 
@@ -122,7 +122,7 @@
         univalence,
       </if>
       <if test="number != null">
-        number,
+        `number`,
       </if>
       <if test="totalPrice != null">
         total_price,
@@ -131,7 +131,7 @@
         payer,
       </if>
       <if test="partition != null">
-        partition,
+        `partition`,
       </if>
       <if test="rawAddTime != null">
         raw_add_time,
@@ -166,7 +166,7 @@
         #{payer,jdbcType=VARCHAR},
       </if>
       <if test="partition != null">
-        #{partition,jdbcType=VARCHAR},
+        #{`partition`,jdbcType=VARCHAR},
       </if>
       <if test="rawAddTime != null">
         #{rawAddTime,jdbcType=TIMESTAMP},
@@ -201,7 +201,7 @@
         univalence = #{record.univalence,jdbcType=DECIMAL},
       </if>
       <if test="record.number != null">
-        number = #{record.number,jdbcType=INTEGER},
+        `number` = #{record.number,jdbcType=INTEGER},
       </if>
       <if test="record.totalPrice != null">
         total_price = #{record.totalPrice,jdbcType=DECIMAL},
@@ -210,7 +210,7 @@
         payer = #{record.payer,jdbcType=VARCHAR},
       </if>
       <if test="record.partition != null">
-        partition = #{record.partition,jdbcType=VARCHAR},
+        `partition` = #{record.partition,jdbcType=VARCHAR},
       </if>
       <if test="record.rawAddTime != null">
         raw_add_time = #{record.rawAddTime,jdbcType=TIMESTAMP},
@@ -232,10 +232,10 @@
       commodity_id = #{record.commodityId,jdbcType=INTEGER},
       commodity_name = #{record.commodityName,jdbcType=VARCHAR},
       univalence = #{record.univalence,jdbcType=DECIMAL},
-      number = #{record.number,jdbcType=INTEGER},
+      `number` = #{record.number,jdbcType=INTEGER},
       total_price = #{record.totalPrice,jdbcType=DECIMAL},
       payer = #{record.payer,jdbcType=VARCHAR},
-      partition = #{record.partition,jdbcType=VARCHAR},
+      `partition` = #{record.partition,jdbcType=VARCHAR},
       raw_add_time = #{record.rawAddTime,jdbcType=TIMESTAMP},
       raw_update_time = #{record.rawUpdateTime,jdbcType=TIMESTAMP},
       state = #{record.state,jdbcType=VARCHAR}

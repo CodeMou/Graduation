@@ -115,7 +115,8 @@
                 <!--票据信息-->
                 <div class="ticket">
                     <ul>
-                        <li th:each="ticket : ${Tickets}">
+                        <li th:each="ticket,ticketNumber : ${Tickets}">
+
                             <div class="search_img">
                                 <img alt="" th:src="${ticket.poster}">
                                 <div class="info">
@@ -135,11 +136,11 @@
                                 </div>
                                 <div class="gp_btn">
                                     <span th:text="${ticket.id}" style="display: none"></span>
-                                    <button class="btn btn-primary" style="float: right;"  data-toggle="modal" data-target="#empUpdateModal1" id="BuyTicket">购票</button>
+                                    <button class="btn btn-primary BuyTicket" style="float: right;"  data-toggle="modal" data-target="#empUpdateModal1">购票</button>
                                     <div class="check_num">
-                                        <a class="reduce" onClick="setAmount.reduce('#qty_item_1')" href="javascript:void(0)"> - </a>
-                                        <input type="text" name="qty_item_1" value="1" id="qty_item_1" onKeyUp="setAmount.modify('#qty_item_1')" class="text"/>
-                                        <a class="add" onClick="setAmount.add('#qty_item_1')" href="javascript:void(0)"> + </a>
+                                        <a class="reduce" th:onclick="'javascript:setAmount.reduce(&quot;#qty_item_'+${ticketNumber.index}+'&quot;)'" href="javascript:void(0)"> - </a>
+                                        <input type="text" th:name="'qty_item_'+${ticketNumber.index}" value="1" th:id="'qty_item_'+${ticketNumber.index}" th:onkeyup="'javascript:setAmount.modify(&quot;#qty_item_'+${ticketNumber.index}+'&quot;)'" class="text"/>
+                                        <a class="add" th:onclick="'javascript:setAmount.add(&quot;#qty_item_'+${ticketNumber.index}+'&quot;)'" href="javascript:void(0)"> + </a>
                                     </div>
                                 </div>
                             </div>
@@ -155,10 +156,11 @@
                                 </div>
                                 <div class="modal-body" style="height: 250px;">
                                     <form>
-                                        <a name="commodityId" id="commodityId" style="display: none"></a>
-                                        <a name="payer" style="display: none" th:value="session.user.username"></a>
+                                        <img alt="" src="" id="ticketImg">
+                                        <input type="hidden" name="commodityId" id="commodityId" />
+                                        <input type="hidden" name="payer" th:value="${session.user.username}"/>
                                         <div class="info">
-                                            <h3>【<span id="address"></span>】<a href="#" target="" name="commodityName" id="commodityName"></a></h3>
+                                            <h3>【<span id="address"></span>】<a href="#" target="" name="commodityName1" id="commodityName1"></a></h3>
                                             <p class="txt_time">
                                                 <a href="#"><span class="fa fa-calendar" id="startTime"></span></a>
                                             </p>
@@ -170,23 +172,30 @@
                                                     <!--<img src="../static/img/1.png">-->
                                                     选区：
                                                     <select name="partition" id="partition">
-                                                        <option>A</option>
-                                                        <option>B</option>
-                                                        <option>C</option>
-                                                        <option>D</option>
-                                                        <option>E</option>
-                                                        <option>F</option>
-                                                        <option>G</option>
-                                                        <option>H</option>
-                                                        <option>I</option>
-                                                        <option>J</option>
+                                                        <option value="A" selected = "selected">A</option>
+                                                        <option value="B">B</option>
+                                                        <option value="C">C</option>
+                                                        <option value="D">D</option>
+                                                        <option value="E">E</option>
+                                                        <option value="F">F</option>
                                                     </select>
                                                 </a>&emsp;
-                                                <span>单价：<em><a name="univalence" id="univalence"></a></em>元</span>&emsp;
-                                                <span>数量：<em><a id="number" name="number"></a></em>张</span>
+                                                <span id="aArea" style="display: none"></span>
+                                                <span id="bArea" style="display: none"></span>
+                                                <span id="cArea" style="display: none"></span>
+                                                <span id="dArea" style="display: none"></span>
+                                                <span id="eArea" style="display: none"></span>
+                                                <span id="fArea" style="display: none"></span>
+                                                <span>单价：<em><a name="univalence1" id="univalence1"></a></em>元</span>&emsp;
+                                                <span>数量：<em><a id="number1" name="number1"></a></em>张</span>
                                             </p>
                                         </div>
-                                        <h3 class="zongjia">共计：<em><a id="totalPrice" name="totalPrice"></a></em>元</h3>
+                                        <h3 class="zongjia">共计：<em><a id="totalPrice1" name="totalPrice"></a></em>元</h3>
+                                        <input name="totalPrice" id="totalPrice" type="hidden">
+                                        <input name="univalence" id="univalence" type="hidden">
+                                        <input name="commodityName" id="commodityName" type="hidden">
+                                        <input name="state" type="hidden" value="paid">
+                                        <input name="number" id="number" type="hidden">
                                     </form>
                                 </div>
                                 <div class="modal-footer">
@@ -289,29 +298,80 @@
         backdrop:"static"
     });
     //获取票价信息
-    $("#BuyTicket").click(function () {
+    $(".BuyTicket").click(function () {
         var id=$(this).parent().find("span").text();
-        var number = $("#qty_item_1").val();
+        var number = $(this).parent().find("input").val();
        $.ajax({
            url:"/ticket/"+id,
            type:"GET",
            success:function (result) {
                console.log(result);
-             $("#commodityId").text(result.id);
-             $("#commodityName").text(result.title);
-            $("#univalence").text(result.aArea);
+             $("#commodityId").val(result.id);
+             $("#commodityName1").text(result.title);
+            $("#aArea").text(result.aArea);
+            $("#bArea").text(result.bArea);
+            $("#cArea").text(result.cArea);
+            $("#dArea").text(result.dArea);
+            $("#eArea").text(result.eArea);
+            $("#fArea").text(result.fArea);
             $("#startTime").text(result.showTimeStart);
-            $("#number").text(number);
+            $("#number1").text(number);
             $("#address").text(result.address);
-            $("#totalPrice").text(number*result.aArea);
+            $("#ticketImg").attr("src",result.poster);
             $("#detailedAddress").text(result.address+"-"+result.detailedAddress);
+               var x=$("#partition").val();
+               if (x=="A"){
+                   $("#univalence1").text($("#aArea").text());
+               }else if (x=="B"){
+                   $("#univalence1").text($("#bArea").text());
+               }else if (x=="C"){
+                   $("#univalence1").text($("#cArea").text());
+               }else if (x=="D"){
+                   $("#univalence1").text($("#dArea").text());
+               }else if (x=="E"){
+                   $("#univalence1").text($("#eArea").text());
+               }else if (x=="F"){
+                   $("#univalence1").text($("#fArea").text());
+               }
+               //计算总价
+               $("#totalPrice1").text(number*$("#univalence1").text());
+           }
+       });
+    });
+    //根据不同分区更改价格
+    $("#partition").change(function () {
+        var x = $(this).val();
+        if (x=="A"){
+            $("#univalence1").text($("#aArea").text());
+        }else if (x=="B"){
+            $("#univalence1").text($("#bArea").text());
+        }else if (x=="C"){
+            $("#univalence1").text($("#cArea").text());
+        }else if (x=="D"){
+            $("#univalence1").text($("#dArea").text());
+        }else if (x=="E"){
+            $("#univalence1").text($("#eArea").text());
+        }else if (x=="F"){
+            $("#univalence1").text($("#fArea").text());
+        }
+        $("#totalPrice1").text($("#number1").text()*$("#univalence1").text());
+    });
+    //点击购票，发起购票请求
+    $("#pay").click(function () {
+        //将值填充到input中
+        $("#commodityName").val($("#commodityName1").text());
+        $("#number").val($("#number1").text());
+        $("#univalence").val($("#univalence1").text());
+        $("#totalPrice").val($("#totalPrice1").text());
+       $.ajax({
+           url:"/ticketPurchase",
+           type:"POST",
+           data:$("#empUpdateModal1 form").serialize(),
+           success:function (result) {
+               alert(result);
            }
        })
     });
-    var Pay = document.getElementById("pay");
-    Pay.onclick = function () {
-
-    };
 
 </script>
 </body>

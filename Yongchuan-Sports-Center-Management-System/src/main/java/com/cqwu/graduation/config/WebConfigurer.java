@@ -5,11 +5,16 @@
 package com.cqwu.graduation.config;
 
 import com.cqwu.graduation.filter.LoginHandlerInterceptor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.servlet.MultipartConfigFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import javax.servlet.MultipartConfigElement;
 
 /**
  * @author Administrator (Administrator@yiji.com)
@@ -19,6 +24,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class WebConfigurer implements WebMvcConfigurer {
+	/**
+	 * 在配置文件中配置的文件保存路径
+	 */
+	@Value("${cbs.imagesPath}")
+	private String mImagesPath;
 
 	@Override public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/").setViewName("login");
@@ -34,5 +44,16 @@ public class WebConfigurer implements WebMvcConfigurer {
 
 	@Override public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+		registry.addResourceHandler("/images/**").addResourceLocations("file:"+mImagesPath);
+	}
+
+	@Bean
+	public MultipartConfigElement multipartConfigElement(){
+		MultipartConfigFactory factory = new MultipartConfigFactory();
+		//文件最大KB,MB
+		factory.setMaxFileSize("1024MB");
+		//设置总上传数据总大小
+		factory.setMaxRequestSize("1024MB");
+		return factory.createMultipartConfig();
 	}
 }

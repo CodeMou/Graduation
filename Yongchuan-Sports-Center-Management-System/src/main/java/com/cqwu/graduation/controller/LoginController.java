@@ -4,6 +4,7 @@ import com.cqwu.graduation.bean.AccountType;
 import com.cqwu.graduation.bean.User;
 import com.cqwu.graduation.biz.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ResourceUtils;
@@ -29,6 +30,8 @@ public class LoginController {
 	@Autowired
 	private UserManager userManager;
 
+	@Value("${cbs.imagesPath}")
+	private String ImagesPath;
 	/**
 	 * 登录验证
 	 * @param map 错误信息
@@ -68,18 +71,12 @@ public class LoginController {
 	public String register(@PathParam("user")User user,Map<String,Object> map){
 		Integer register = userManager.register(user);
 		//注册的同时创建和以用户名为名的文件夹
-		try{
-			String path = ResourceUtils.getURL("classpath:").getPath();
-			File file = new File(path+"static/img/"+user.getUsername());
+			File file = new File(ImagesPath+user.getUsername());
 			if (!file.exists()){
-				file.mkdir();
+				file.mkdirs();
 			}
-		}catch (FileNotFoundException ex){
-			ex.printStackTrace();
-			return "fail";
-		}
 		if (register > 0){
-			map.put("msg","注册成功！");
+			map.put("error","注册成功！");
 			return "login";
 		}else {
 			return "fail";
