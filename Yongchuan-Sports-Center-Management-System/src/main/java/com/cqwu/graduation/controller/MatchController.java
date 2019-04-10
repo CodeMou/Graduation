@@ -38,13 +38,13 @@ public class MatchController {
 	 * @return
 	 */
 	@RequestMapping(value = "/matchPage", produces = "text/html;charset=UTF-8")
-	public String select1(@RequestParam(value = "PageNum", defaultValue = "1") Integer pageNum, @RequestParam("subject")String subject, @RequestParam("category")String category, Model model) {
+	public String select1(@RequestParam(value = "PageNum", defaultValue = "1") Integer pageNum, @RequestParam("subject")String subject, @RequestParam("category")String category,Model model) {
 		PageInfo<Match> matchPageInfo = matchManager.selectByExample(null, subject, category, pageNum);
-		model.addAttribute("matchs",matchPageInfo.getList());
+		model.addAttribute("matches",matchPageInfo.getList());
 		model.addAttribute("page",matchPageInfo);
 		model.addAttribute("category",category);
 		model.addAttribute("subject",subject);
-		return "/Match";
+		return "Match";
 	}
 	/**
 	 * 报名比赛
@@ -55,14 +55,19 @@ public class MatchController {
 	@PostMapping(value = "/EnrollMatch")
 	public String EnrollMatch(Enroll enroll){
 		long l = enrollerManager.countMatchByUsername(enroll.getEntryMatchId(), enroll.getUsername());
-		if (l > 3){
+		if (l > 2){
 			return "对不起，您已报名三场比赛，请参加完比赛以后再次报名，谢谢";
 		}else {
-			int i = enrollerManager.insertOfmatch(enroll);
-			if (i > 0){
-				return "报名成功";
+			long l1 = enrollerManager.countMatchRepeat(enroll.getEntryMatchId(), enroll.getUsername());
+			if (l1 > 0){
+				return "对不起，您已报该比赛，请勿重复报名!";
 			}else {
-				return "报名失败";
+				int i = enrollerManager.insertOfmatch(enroll);
+				if (i > 0){
+					return "报名成功";
+				}else {
+					return "报名失败";
+				}
 			}
 		}
 

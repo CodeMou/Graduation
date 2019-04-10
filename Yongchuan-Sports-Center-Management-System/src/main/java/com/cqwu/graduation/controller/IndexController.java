@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -37,10 +38,7 @@ public class IndexController {
 	 */
 	@RequestMapping(value = "/fieldPage", produces = "text/html;charset=UTF-8")
 	public String select2(Model model) {
-		PageInfo<Field> fieldPageInfo = fieldManager.selectByExample(null);
-		model.addAttribute("page",fieldPageInfo);
-		model.addAttribute("fields",fieldPageInfo.getList());
-		return "index";
+		return null;
 	}
 
 	/**
@@ -51,26 +49,20 @@ public class IndexController {
 	@ResponseBody
 	@PostMapping("/BookingSpace")
 	public String BookingSpace(Enroll enroll){
-		long l = enrollerManager.countFieldByUsername(enroll.getEntryFieldName(), enroll.getUsername());
-		long l1 = enrollerManager.countFieldByBoss(enroll.getAppointStartTime(), enroll.getAppointEndTime());
-		Field field = fieldManager.selectByName(enroll.getEntryFieldName()).get(0);
-		Integer number = field.getNumber();
-		if (l > 3 ){
-			return "对不起，当前您所预定的场地数大于3场，无法预约！";
-		}else if (l1 >= number){
-			//根据预约时间判断人数
-			return "对不起，预约期间人数已满";
-		}else{
-			int i = enrollerManager.insertOfFeild(enroll);
-			if (i > 0){
-				return "预约成功！";
-			}
-		}
+
 		return null;
+
 	}
 
-	public String navegation(){
-
+	/**
+	 * 主页面跳转
+	 * @param page
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/navigation")
+	public String navigation(@RequestParam("page")String page, Model model){
+		model.addAttribute("whatPage",page);
 		return "navigation";
 	}
 }

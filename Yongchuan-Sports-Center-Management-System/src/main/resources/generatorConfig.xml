@@ -16,6 +16,6 @@
                              type="XMLMAPPER"/>
         <!--生成对应表及类名 -->
 
-        <table tableName="enroll" domainObjectName="Enroll"></table>
+        <table tableName="train" domainObjectName="Train"></table>
     </context>
 </generatorConfiguration>

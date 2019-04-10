@@ -350,7 +350,7 @@ public class BackstageController {
 		model.addAttribute("page", trainPageInfo);
 		model.addAttribute("subject", subject);
 		model.addAttribute("trains",trainPageInfo.getList());
-		return "/BackstageTrain";
+		return "BackstageTrain";
 	}
 
 	/**
@@ -458,7 +458,7 @@ public class BackstageController {
 		model.addAttribute("page",matchPageInfo);
 		model.addAttribute("category",category);
 		model.addAttribute("subject",subject);
-		return "/BackstageMatch";
+		return "BackstageMatch";
 	}
 
 	/**
@@ -566,7 +566,7 @@ public class BackstageController {
 		PageInfo<Field> fieldPageInfo = fieldManager.selectByExample(null);
 		model.addAttribute("page",fieldPageInfo);
 		model.addAttribute("fields",fieldPageInfo.getList());
-		return "/BackstageField";
+		return "BackstageField";
 	}
 
 	/**

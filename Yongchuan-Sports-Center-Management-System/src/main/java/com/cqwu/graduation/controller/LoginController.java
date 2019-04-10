@@ -53,7 +53,7 @@ public class LoginController {
 			if (user.getAccountType().equals(AccountType.ADMINISTRATORS)){
 				return "redirect:/BackstageUserNormal";
 			}else {
-				return "redirect:/navigation";
+				return "redirect:/navigation?page=ticket";
 			}
 		}else {
 			map.put("error","用户名或密码错误！请重新输入");

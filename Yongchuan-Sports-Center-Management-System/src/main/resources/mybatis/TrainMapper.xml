@@ -3,6 +3,7 @@
 <mapper namespace="com.cqwu.graduation.mapper.TrainMapper">
   <resultMap id="BaseResultMap" type="com.cqwu.graduation.bean.Train">
     <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="subject" jdbcType="VARCHAR" property="subject" />
     <result column="teacher" jdbcType="VARCHAR" property="teacher" />
     <result column="surplus" jdbcType="INTEGER" property="surplus" />
@@ -11,10 +12,12 @@
     <result column="total_hours" jdbcType="INTEGER" property="totalHours" />
     <result column="hours" jdbcType="INTEGER" property="hours" />
     <result column="everyday_hours" jdbcType="INTEGER" property="everydayHours" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="detailed_address" jdbcType="VARCHAR" property="detailedAddress" />
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="raw_add_time" jdbcType="TIMESTAMP" property="rawAddTime" />
     <result column="raw_update_time" jdbcType="TIMESTAMP" property="rawUpdateTime" />
-    <result column="description" jdbcType="VARCHAR" property="description" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -75,8 +78,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, subject, teacher, surplus, quota, state, total_hours, hours, everyday_hours, 
-    start_time, raw_add_time, raw_update_time, description
+    id, title, subject, teacher, surplus, quota, state, total_hours, hours, everyday_hours, 
+    address, detailed_address, start_time, description, raw_add_time, raw_update_time
   </sql>
   <select id="selectByExample" parameterType="com.cqwu.graduation.bean.TrainExample" resultMap="BaseResultMap">
     select
@@ -99,22 +102,27 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.cqwu.graduation.bean.Train">
-    insert into train (id, subject, teacher, 
-      surplus, quota, state, 
-      total_hours, hours, everyday_hours, 
-      start_time, raw_add_time, raw_update_time, 
-      description)
-    values (#{id,jdbcType=INTEGER}, #{subject,jdbcType=VARCHAR}, #{teacher,jdbcType=VARCHAR}, 
-      #{surplus,jdbcType=INTEGER}, #{quota,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}, 
-      #{totalHours,jdbcType=INTEGER}, #{hours,jdbcType=INTEGER}, #{everydayHours,jdbcType=INTEGER}, 
-      #{startTime,jdbcType=TIMESTAMP}, #{rawAddTime,jdbcType=TIMESTAMP}, #{rawUpdateTime,jdbcType=TIMESTAMP}, 
-      #{description,jdbcType=VARCHAR})
+    insert into train (id, title, subject, 
+      teacher, surplus, quota, 
+      state, total_hours, hours, 
+      everyday_hours, address, detailed_address, 
+      start_time, description, raw_add_time, 
+      raw_update_time)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{subject,jdbcType=VARCHAR}, 
+      #{teacher,jdbcType=VARCHAR}, #{surplus,jdbcType=INTEGER}, #{quota,jdbcType=INTEGER}, 
+      #{state,jdbcType=VARCHAR}, #{totalHours,jdbcType=INTEGER}, #{hours,jdbcType=INTEGER}, 
+      #{everydayHours,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{detailedAddress,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{description,jdbcType=VARCHAR}, now(),
+      now())
   </insert>
   <insert id="insertSelective" parameterType="com.cqwu.graduation.bean.Train">
     insert into train
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
+      </if>
+      <if test="title != null">
+        title,
       </if>
       <if test="subject != null">
         subject,
@@ -140,8 +148,17 @@
       <if test="everydayHours != null">
         everyday_hours,
       </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="detailedAddress != null">
+        detailed_address,
+      </if>
       <if test="startTime != null">
         start_time,
+      </if>
+      <if test="description != null">
+        description,
       </if>
       <if test="rawAddTime != null">
         raw_add_time,
@@ -149,13 +166,13 @@
       <if test="rawUpdateTime != null">
         raw_update_time,
       </if>
-      <if test="description != null">
-        description,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
       </if>
       <if test="subject != null">
         #{subject,jdbcType=VARCHAR},
@@ -181,17 +198,23 @@
       <if test="everydayHours != null">
         #{everydayHours,jdbcType=INTEGER},
       </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="detailedAddress != null">
+        #{detailedAddress,jdbcType=VARCHAR},
+      </if>
       <if test="startTime != null">
         #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
       </if>
       <if test="rawAddTime != null">
         #{rawAddTime,jdbcType=TIMESTAMP},
       </if>
       <if test="rawUpdateTime != null">
         #{rawUpdateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="description != null">
-        #{description,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -206,6 +229,9 @@
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
       </if>
       <if test="record.subject != null">
         subject = #{record.subject,jdbcType=VARCHAR},
@@ -231,17 +257,23 @@
       <if test="record.everydayHours != null">
         everyday_hours = #{record.everydayHours,jdbcType=INTEGER},
       </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailedAddress != null">
+        detailed_address = #{record.detailedAddress,jdbcType=VARCHAR},
+      </if>
       <if test="record.startTime != null">
         start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
       </if>
       <if test="record.rawAddTime != null">
         raw_add_time = #{record.rawAddTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.rawUpdateTime != null">
         raw_update_time = #{record.rawUpdateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.description != null">
-        description = #{record.description,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -251,6 +283,7 @@
   <update id="updateByExample" parameterType="map">
     update train
     set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
       subject = #{record.subject,jdbcType=VARCHAR},
       teacher = #{record.teacher,jdbcType=VARCHAR},
       surplus = #{record.surplus,jdbcType=INTEGER},
@@ -259,10 +292,12 @@
       total_hours = #{record.totalHours,jdbcType=INTEGER},
       hours = #{record.hours,jdbcType=INTEGER},
       everyday_hours = #{record.everydayHours,jdbcType=INTEGER},
+      address = #{record.address,jdbcType=VARCHAR},
+      detailed_address = #{record.detailedAddress,jdbcType=VARCHAR},
       start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      description = #{record.description,jdbcType=VARCHAR},
       raw_add_time = #{record.rawAddTime,jdbcType=TIMESTAMP},
-      raw_update_time = #{record.rawUpdateTime,jdbcType=TIMESTAMP},
-      description = #{record.description,jdbcType=VARCHAR}
+      raw_update_time = #{record.rawUpdateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

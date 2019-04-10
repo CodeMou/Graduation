@@ -142,11 +142,11 @@ jQuery(document).ready(function($) {
                     )
                 }else if (result.category == "Badminton") {
                     $("#subject").append(
-                        "<option value='man_One'>男子单打</option>"
-                        +"<option value='man_Two'>男子双打</option>"
-                        +"<option value='woman_One'>女子单打</option>"
-                        +"<option value='woman_Two'>女子双打</option>"
-                        +"<option value='mix_'>混合双打</option>"
+                        "<option value='manOne'>男子单打</option>"
+                        +"<option value='manTwo'>男子双打</option>"
+                        +"<option value='womanOne'>女子单打</option>"
+                        +"<option value='womanTwo'>女子双打</option>"
+                        +"<option value='mix'>混合双打</option>"
                     )
                 }else if (result.category == "Athletics") {
                     $("#subject").append(
@@ -329,11 +329,11 @@ jQuery(document).ready(function($) {
             )
         }else if (type == "Badminton") {
             $("#subject").append(
-                "<option value='man_One'>男子单打</option>"
-                +"<option value='man_Two'>男子双打</option>"
-                +"<option value='woman_One'>女子单打</option>"
-                +"<option value='woman_Two'>女子双打</option>"
-                +"<option value='mix_'>混合双打</option>"
+                "<option value='manOne'>男子单打</option>"
+                +"<option value='manTwo'>男子双打</option>"
+                +"<option value='womanOne'>女子单打</option>"
+                +"<option value='womanTwo'>女子双打</option>"
+                +"<option value='mix'>混合双打</option>"
             )
         }else if (type == "Athletics") {
             $("#subject").append(
@@ -376,11 +376,11 @@ jQuery(document).ready(function($) {
             )
         }else if (type == "Badminton") {
             $("#subject1").append(
-                "<option value='man_One'>男子单打</option>"
-                +"<option value='man_Two'>男子双打</option>"
-                +"<option value='woman_One'>女子单打</option>"
-                +"<option value='woman_Two'>女子双打</option>"
-                +"<option value='mix_'>混合双打</option>"
+                "<option value='manOne'>男子单打</option>"
+                +"<option value='manTwo'>男子双打</option>"
+                +"<option value='womanOne'>女子单打</option>"
+                +"<option value='womanTwo'>女子双打</option>"
+                +"<option value='mix'>混合双打</option>"
             )
         }else if (type == "Athletics") {
             $("#subject1").append(

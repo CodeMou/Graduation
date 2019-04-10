@@ -1,14 +1,12 @@
 package com.cqwu.graduation.bean;
 
-import com.alibaba.fastjson.annotation.JSONField;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
 
 public class Train {
-    /* 主键，自增*/
+    /* 主键 自增*/
     private Integer id;
+    /* 标题 */
+    private String title;
     /* 培训科目 */
     private String subject;
     /* 培训老师 */
@@ -17,25 +15,26 @@ public class Train {
     private Integer surplus;
     /* 名额 */
     private Integer quota;
-    /* 状态*/
+    /* 状态 */
     private String state;
     /* 总课时 */
     private Integer totalHours;
-    /* 课时时间 单位为分钟 */
+    /* 课时时间 */
     private Integer hours;
     /* 每日课时 */
     private Integer everydayHours;
+    /* 地址 */
+    private String address;
+    /* 详细地址 */
+    private String detailedAddress;
     /* 开始时间 */
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date startTime;
-    /* 新增时间*/
-    private Date rawAddTime;
-    /* 修改时间*/
-    private Date rawUpdateTime;
-    /* 说明 */
+    /* 描述 */
     private String description;
+    /* 新增时间 */
+    private Date rawAddTime;
+    /* 修改时间 */
+    private Date rawUpdateTime;
 
     public Integer getId() {
         return id;
@@ -43,6 +42,14 @@ public class Train {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getSubject() {
@@ -109,12 +116,36 @@ public class Train {
         this.everydayHours = everydayHours;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getDetailedAddress() {
+        return detailedAddress;
+    }
+
+    public void setDetailedAddress(String detailedAddress) {
+        this.detailedAddress = detailedAddress;
+    }
+
     public Date getStartTime() {
         return startTime;
     }
 
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Date getRawAddTime() {
@@ -131,13 +162,5 @@ public class Train {
 
     public void setRawUpdateTime(Date rawUpdateTime) {
         this.rawUpdateTime = rawUpdateTime;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }

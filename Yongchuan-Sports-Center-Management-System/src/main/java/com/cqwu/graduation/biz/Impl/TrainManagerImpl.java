@@ -26,7 +26,7 @@ import java.util.List;
  * @since 2019/3/5
  */
 @Service
-@CacheConfig(cacheNames = "train")
+//@CacheConfig(cacheNames = "train")
 public class TrainManagerImpl implements TrainManager {
 
 	@Autowired
@@ -37,7 +37,7 @@ public class TrainManagerImpl implements TrainManager {
 	}
 
 	@Override
-	@CacheEvict(key = "#id",allEntries = true)
+//	@CacheEvict(key = "#id",allEntries = true)
 	public int deleteById(Integer id) {
 		TrainExample example = new TrainExample();
 		TrainExample.Criteria criteria = example.createCriteria();
@@ -56,7 +56,7 @@ public class TrainManagerImpl implements TrainManager {
 	}
 
 	@Override
-	@Cacheable
+//	@Cacheable
 	public Train selectById(Integer id,Integer pageNum) {
 		TrainExample example = new TrainExample();
 		TrainExample.Criteria criteria = example.createCriteria();
@@ -68,7 +68,7 @@ public class TrainManagerImpl implements TrainManager {
 	}
 
 	@Override
-	@Cacheable
+//	@Cacheable
 	public PageInfo<Train> selectBySubject(String subject, Integer pageNum) {
 		TrainExample example = new TrainExample();
 		TrainExample.Criteria criteria = example.createCriteria();
@@ -80,7 +80,7 @@ public class TrainManagerImpl implements TrainManager {
 	}
 
 	@Override
-	@CacheEvict(key = "#train",allEntries = true)
+//	@CacheEvict(key = "#train",allEntries = true)
 	public int updateByExampleSelective(Train train) {
 		TrainExample example = new TrainExample();
 		TrainExample.Criteria criteria = example.createCriteria();

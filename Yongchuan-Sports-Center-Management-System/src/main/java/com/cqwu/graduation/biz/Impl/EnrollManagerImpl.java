@@ -62,32 +62,22 @@ public class EnrollManagerImpl implements EnrollerManager {
 		return l;
 	}
 
+	@Override public long countMatchRepeat(Integer matchId, String username) {
+		EnrollExample enrollExample = new EnrollExample();
+		EnrollExample.Criteria criteria = enrollExample.createCriteria();
+		criteria.andUsernameEqualTo(username);
+		criteria.andEntryMatchIdEqualTo(matchId);
+		criteria.andMatchStateEqualTo("Enrolling");
+		long l = enrollMapper.countByExample(enrollExample);
+		return l;
+	}
+
 	@Override public long countTrainByUsername(Integer trainId, String username) {
 		EnrollExample enrollExample = new EnrollExample();
 		EnrollExample.Criteria criteria = enrollExample.createCriteria();
 		criteria.andUsernameEqualTo(username);
 		criteria.andEntrySubjectIdIsNotNull();
 		criteria.andSubjectStateEqualTo("Enrolling");
-		long l = enrollMapper.countByExample(enrollExample);
-		return l;
-	}
-
-	@Override public long countFieldByUsername(String fieldName, String username) {
-		EnrollExample enrollExample = new EnrollExample();
-		EnrollExample.Criteria criteria = enrollExample.createCriteria();
-		criteria.andUsernameEqualTo(username);
-		criteria.andEntryFieldNameIsNotNull();
-		criteria.andFieldStateEqualTo("Enrolling");
-		long l = enrollMapper.countByExample(enrollExample);
-		return l;
-	}
-
-	@Override public long countFieldByBoss(String openTimeStart, String openTimeEnd) {
-		EnrollExample enrollExample = new EnrollExample();
-		EnrollExample.Criteria criteria = enrollExample.createCriteria();
-		criteria.andAppointStartTimeEqualTo(openTimeStart);
-		criteria.andAppointEndTimeEqualTo(openTimeEnd);
-		criteria.andFieldStateEqualTo("Enrolling");
 		long l = enrollMapper.countByExample(enrollExample);
 		return l;
 	}

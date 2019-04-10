@@ -45,12 +45,12 @@
                             <div class="card-body">
                                 <div>
                                     <table style="text-align: center" class="table">
-                                        <tr><td>类别：</td><td><a th:href="@{/match(category='Football',subject='')}">足球</a></td><td><a th:href="@{/match(category='Basketball',subject='')}">篮球</a></td><td><a th:href="@{/match(category='TableTennis',subject='')}">乒乓球</a></td><td><a th:href="@{/match(category='Swimming',subject='')}">游泳</a></td><td><a th:href="@{/match(category='Bodybuilding',subject='')}">健身</a></td><td><a th:href="@{/match(category='Badminton',subject='')}">羽毛球</a></td><td><a th:href="@{/match(category='Athletics',subject='')}">田径</a></td><td><a th:href="@{/match(category='Tennis',subject='')}">网球</a></td><td><a th:href="@{/match(category='Shotput',subject='')}">铅球</a></td><td><a th:href="@{/match(category='Other',subject='')}">其他</a></td></tr>
+                                        <tr><td>类别：</td><td><a th:href="@{/match(category='Football',subject='')}">足球</a></td><td><a th:href="@{/match(category='Basketball',subject='')}">篮球</a></td><td><a th:href="@{/match(category='TableTennis',subject='')}">乒乓球</a></td><td><a th:href="@{/match(category='Swimming',subject='')}">游泳</a></td><td><a th:href="@{/match(category='Badminton',subject='')}">羽毛球</a></td><td><a th:href="@{/match(category='Athletics',subject='')}">田径</a></td><td><a th:href="@{/match(category='Other',subject='')}">其他</a></td></tr>
                                         <tr th:if="${category}=='Football'"><td>项目类别：</td><td><a th:href="@{/match(category='Football',subject='Eleven')}">11人制</a></td></tr>
                                         <tr th:if="${category}=='Basketball'"><td>项目类别：</td><td><a th:href="@{/match(category='Basketball',subject='5V5')}">5V5</a></td></tr>
                                         <tr th:if="${category}=='TableTennis'"><td>项目类别：</td><td><a th:href="@{/match(category='TableTennis',subject='manOne')}">男子单打</a></td><td><a th:href="@{/match(category='TableTennis',subject='manTwo')}">男子双打</a></td><td><a th:href="@{/match(category='TableTennis',subject='womanOne')}">女子单打</a></td><td><a th:href="@{/match(category='TableTennis',subject='womanTwo')}">女子双打</a></td><td><a th:href="@{/match(category='TableTennis',subject='mix')}">混合双打</a></td></tr>
                                         <tr th:if="${category}=='Swimming'"><td>项目类别：</td><td><a th:href="@{/match(category='Swimming',subject='backstroke')}">100米仰泳</a></td><td><a th:href="@{/match(category='Swimming',subject='Breaststroke')}">100米蛙泳</a></td><td><a th:href="@{/match(category='Swimming',subject='Butterfly')}">100米蝶泳</a></td><td><a th:href="@{/match(category='Swimming',subject='Free')}">100米自由泳</a></td></tr>
-                                        <tr th:if="${category}=='Badminton'"><td>项目类别：</td><td><a th:href="@{/match(category='Badminton',subject='man_One')}">男子单打</a></td><td><a th:href="@{/match(category='Badminton',subject='man_Two')}">男子双打</a></td><td><a th:href="@{/match(category='Badminton',subject='woman_One')}">女子单打</a></td><td><a th:href="@{/match(category='Badminton',subject='woman_Two')}">女子双打</a></td><td><a th:href="@{/match(category='Badminton',subject='mix_')}">混合双打</a></td></tr>
+                                        <tr th:if="${category}=='Badminton'"><td>项目类别：</td><td><a th:href="@{/match(category='Badminton',subject='manOne')}">男子单打</a></td><td><a th:href="@{/match(category='Badminton',subject='manTwo')}">男子双打</a></td><td><a th:href="@{/match(category='Badminton',subject='womanOne')}">女子单打</a></td><td><a th:href="@{/match(category='Badminton',subject='womanTwo')}">女子双打</a></td><td><a th:href="@{/match(category='Badminton',subject='mix')}">混合双打</a></td></tr>
                                         <tr th:if="${category}=='Athletics'"><td>项目类别：</td><td><a th:href="@{/match(category='Athletics',subject='50')}">50米跑</a></td><td><a th:href="@{/match(category='Athletics',subject='100')}">100米跑</a></td><td><a th:href="@{/match(category='Athletics',subject='200')}">200米跑</a></td><td><a th:href="@{/match(category='Athletics',subject='400')}">400米跑</a></td><td><a th:href="@{/match(category='Athletics',subject='800')}">800米跑</a></td><td><a th:href="@{/match(category='Athletics',subject='1500')}">1500米跑</a></td><td><a th:href="@{/match(category='Athletics',subject='highJump')}">跳高</a></td><td><a th:href="@{/match(category='Athletics',subject='longJump')}">跳远</a></td></tr>
                                     </table>
                                 </div>
@@ -126,11 +126,8 @@
                                                 <option value="Basketball">篮球</option>
                                                 <option value="TableTennis">乒乓球</option>
                                                 <option value="Swimming">游泳</option>
-                                                <option value="Bodybuilding">健身</option>
                                                 <option value="Badminton">羽毛球</option>
                                                 <option value="Athletics">田径</option>
-                                                <option value="Tennis">网球</option>
-                                                <option value="Shotput">铅球</option>
                                                 <option value="Other">其他</option>
                                             </select>
                                         </div>
@@ -190,11 +187,8 @@
                                                 <option value="Basketball">篮球</option>
                                                 <option value="TableTennis">乒乓球</option>
                                                 <option value="Swimming">游泳</option>
-                                                <option value="Bodybuilding">健身</option>
                                                 <option value="Badminton">羽毛球</option>
                                                 <option value="Athletics">田径</option>
-                                                <option value="Tennis">网球</option>
-                                                <option value="Shotput">铅球</option>
                                                 <option value="Other">其他</option>
                                             </select>
                                         </div>

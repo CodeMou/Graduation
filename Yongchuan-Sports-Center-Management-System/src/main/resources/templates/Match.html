@@ -22,90 +22,66 @@
                 <div class="search">
                     <dl class="Categories">
                         <dt class="left">分&ensp;类：</dt>
-                        <dd class="all"><a href="#" class="this" >全部</a></dd>
+                        <dd class="all"><a th:href="@{/matchPage(subject='',category='')}" th:class="${category==''?'this':''}" >全部</a></dd>
                         <dd class="right" style="float: left;width: 75%;">
-                            <ul style="padding: 0;">
-                                <li><a href="#" class="" value="Football">足球</a></li>
-                                <li><a href="#" class="" value="PingPong">乒乓</a></li>
-                                <li><a href="#" class="" value="PingPong">羽毛球</a></li>
-                                <li><a href="#" class="" value="Basketball">篮球</a></li>
-                                <li><a href="#" class="" value="Swimming">游泳</a></li>
-                                <li><a href="#" class="" value="Athletic">田径</a></li>
+                            <ul style="padding: 0;" id="category">
+                                <li><a th:href="@{/matchPage(subject='',category='Football')}" th:class="${category=='Football'?'this':''}" value="Football">足球</a></li>
+                                <li><a th:href="@{/matchPage(subject='',category='TableTennis')}" th:class="${category=='TableTennis'?'this':''}" value="TableTennis">乒乓球</a></li>
+                                <li><a th:href="@{/matchPage(subject='',category='Badminton')}" th:class="${category=='Badminton'?'this':''}" value="Badminton">羽毛球</a></li>
+                                <li><a th:href="@{/matchPage(subject='',category='Basketball')}" th:class="${category=='Basketball'?'this':''}" value="Basketball">篮球</a></li>
+                                <li><a th:href="@{/matchPage(subject='',category='Swimming')}" th:class="${category=='Swimming'?'this':''}" value="Swimming">游泳</a></li>
+                                <li><a th:href="@{/matchPage(subject='',category='Athletic')}" th:class="${category=='Athletic'?'this':''}" value="Athletic">田径</a></li>
                             </ul>
                         </dd>
                     </dl>
-                    <dl class="Small_class" style="display: none;">
+                    <dl class="Small_class" th:if="${category!=''}" id="subject">
                         <dt class="left">子&ensp;类：</dt>
-                        <dd class="all"><a href="#" class="" >全部</a></dd>
-                        <dd class="right" style="">
+                        <dd class="right" th:if="${category=='Football'}">
                             <ul style="padding: 0;">
-                                <li><a href="#" class="" value='Chorus'>11人制</a></li>
+                                <li><a th:href="@{/matchPage(subject='Eleven',category='Football')}" th:class="${subject=='Eleven'?'this':''}" value='Eleven'>11人制</a></li>
                             </ul>
                         </dd>
-                        <dd class="right" style="">
+                        <dd class="right" th:if="${category=='Basketball'}">
                             <ul style="padding: 0;">
-                                <li><a href="#" class="" value='Drama'>男子单打</a></li>
-                                <li><a href="#" class="" value='Opera'>男子双打</a></li>
-                                <li><a href="#" class="" value='TheLivingTheatre'>女子单打</a></li>
-                                <li><a href="#" class="" value='Other'>女子双打</a></li>
-                                <li><a href="#" class="" value='Other'>混合双打</a></li>
+                                <li><a th:href="@{/matchPage(subject='5V5',category='Basketball')}" th:class="${subject=='5V5'?'this':''}" value='5V5'>5V5</a></li>
                             </ul>
                         </dd>
-                        <dd class="right" style="">
+                        <dd class="right" th:if="${category=='TableTennis'}">
                             <ul style="padding: 0;">
-                                <li><a href="#" class="" value='Drama'>男子单打</a></li>
-                                <li><a href="#" class="" value='Opera'>男子双打</a></li>
-                                <li><a href="#" class="" value='TheLivingTheatre'>女子单打</a></li>
-                                <li><a href="#" class="" value='Other'>女子双打</a></li>
-                                <li><a href="#" class="" value='Other'>混合双打</a></li>
+                                <li><a th:href="@{/matchPage(subject='manOne',category='TableTennis')}" th:class="${subject=='manOne'?'this':''}" value='manOne'>男子单打</a></li>
+                                <li><a th:href="@{/matchPage(subject='manTwo',category='TableTennis')}" th:class="${subject=='manTwo'?'this':''}" value='manTwo'>男子双打</a></li>
+                                <li><a th:href="@{/matchPage(subject='womanOne',category='TableTennis')}" th:class="${subject=='womanOne'?'this':''}" value='womanOne'>女子单打</a></li>
+                                <li><a th:href="@{/matchPage(subject='womanTwo',category='TableTennis')}" th:class="${subject=='womanTwo'?'this':''}" value='womanTwo'>女子双打</a></li>
+                                <li><a th:href="@{/matchPage(subject='mix',category='TableTennis')}" th:class="${subject=='mix'?'this':''}" value='mix'>混合双打</a></li>
                             </ul>
                         </dd>
-                        <dd class="right" style="">
+                        <dd class="right" th:if="${category=='Swimming'}">
                             <ul style="padding: 0;">
-                                <li><a href="#" class="" value='Rock'>5V5</a></li>
+                                <li><a th:href="@{/matchPage(subject='backstroke',category='Swimming')}" th:class="${subject=='backstroke'?'this':''}" value='backstroke'>100米仰泳</a></li>
+                                <li><a th:href="@{/matchPage(subject='Breaststroke',category='Swimming')}" th:class="${subject=='Breaststroke'?'this':''}" value='Breaststroke'>100米蛙泳</a></li>
+                                <li><a th:href="@{/matchPage(subject='Butterfly',category='Swimming')}" th:class="${subject=='Butterfly'?'this':''}" value='Butterfly'>100米蝶泳</a></li>
+                                <li><a th:href="@{/matchPage(subject='Free',category='Swimming')}" th:class="${subject=='Free'?'this':''}" value='Free'>100米自由泳</a></li>
                             </ul>
                         </dd>
-                        <dd class="right" style="">
+                        <dd class="right" th:if="${category=='Athletic'}">
                             <ul style="padding: 0;">
-                                <li><a href="#" class="" value='LatinDance'>100米仰泳</a></li>
-                                <li><a href="#" class="" value='ModernDance'>100米蛙泳</a></li>
-                                <li><a href="#" class="" value='FolkDance'>100米蝶泳</a></li>
-                                <li><a href="#" class="" value='Ballet'>100米自由泳</a></li>
+                                <li><a th:href="@{/matchPage(subject='50',category='Athletic')}" th:class="${subject=='50'?'this':''}" value='50'>50米跑</a></li>
+                                <li><a th:href="@{/matchPage(subject='100',category='Athletic')}" th:class="${subject=='100'?'this':''}" value='100'>100米跑</a></li>
+                                <li><a th:href="@{/matchPage(subject='200',category='Athletic')}" th:class="${subject=='200'?'this':''}" value='200'>200米跑</a></li>
+                                <li><a th:href="@{/matchPage(subject='400',category='Athletic')}" th:class="${subject=='400'?'this':''}" value='400'>400米跑</a></li>
+                                <li><a th:href="@{/matchPage(subject='800',category='Athletic')}" th:class="${subject=='800'?'this':''}" value='800'>800米跑</a></li>
+                                <li><a th:href="@{/matchPage(subject='1500',category='Athletic')}" th:class="${subject=='1500'?'this':''}" value='1500'>1500米跑</a></li>
+                                <li><a th:href="@{/matchPage(subject='highJump',category='Athletic')}" th:class="${subject=='highJump'?'this':''}" value='highJump'>跳高</a></li>
+                                <li><a th:href="@{/matchPage(subject='longJump',category='Athletic')}" th:class="${subject=='longJump'?'this':''}" value='longJump'>跳远</a></li>
                             </ul>
                         </dd>
-                        <dd class="right" style="">
+                        <dd class="right" th:if="${category=='Badminton'}">
                             <ul style="padding: 0;">
-                                <li><a href="#" class="" value='BeijingOpera'>50米跑</a></li>
-                                <li><a href="#" class="" value='ShaoxingOpera'>100米跑</a></li>
-                                <li><a href="#" class="" value='Huangmeixi'>200米跑</a></li>
-                                <li><a href="#" class="" value='PingJuOpera'>400米跑</a></li>
-                                <li><a href="#" class="" value='HenanOpera'>800米跑</a></li>
-                                <li><a href="#" class="" value='Other'>1500米跑</a></li>
-                                <li><a href="#" class="" value='HenanOpera'>跳高</a></li>
-                                <li><a href="#" class="" value='Other'>跳远</a></li>
-                            </ul>
-                        </dd>
-                        <dd class="right" style="">
-                            <ul style="padding: 0;">
-                                <li><a href="#" class="" value='Football'>足球</a></li>
-                                <li><a href="#" class="" value='Basketball'>篮球</a></li>
-                                <li><a href="#" class="" value='TableTennis'>乒乓球</a></li>
-                                <li><a href="#" class="" value='Swimming'>游泳</a></li>
-                                <li><a href="#" class="" value='Bodybuilding'>健身</a></li>
-                                <li><a href="#" class="" value='Badminton'>羽毛球</a></li>
-                                <li><a href="#" class="" value='Athletics'>田径</a></li>
-                                <li><a href="#" class="" value='Tennis'>网球</a></li>
-                                <li><a href="#" class="" value='Shotput'>铅球</a></li>
-                                <li><a href="#" class="" value='Other'>其他</a></li>
-                            </ul>
-                        </dd>
-                        <dd class="right" style="">
-                            <ul style="padding: 0;">
-                                <li><a href="#" class="" value='Acrobatics'>器械杂技</a></li>
-                                <li><a href="#" class="" value='BodyAcrobatics'>形体杂技</a></li>
-                                <li><a href="#" class="" value='AerialAcrobatics'>高空杂技</a></li>
-                                <li><a href="#" class="" value='OralSkills'>口技</a></li>
-                                <li><a href="#" class="" value='Other'>其他</a></li>
+                                <li><a th:href="@{/matchPage(subject='manOne',category='Badminton')}" th:class="${subject=='manOne'?'this':''}" value='manOne'>男子单打</a></li>
+                                <li><a th:href="@{/matchPage(subject='manTwo',category='Badminton')}" th:class="${subject=='manTwo'?'this':''}" value='manTwo'>男子双打</a></li>
+                                <li><a th:href="@{/matchPage(subject='womanOne',category='Badminton')}" th:class="${subject=='womanOne'?'this':''}" value='womanOne'>女子单打</a></li>
+                                <li><a th:href="@{/matchPage(subject='womanTwo',category='Badminton')}" th:class="${subject=='womanTwo'?'this':''}" value='womanTwo'>女子双打</a></li>
+                                <li><a th:href="@{/matchPage(subject='mix',category='Badminton')}" th:class="${subject=='mix'?'this':''}" value='mix'>混合双打</a></li>
                             </ul>
                         </dd>
                     </dl>
@@ -113,75 +89,31 @@
                 <!--比赛信息-->
                 <div class="ticket">
                     <ul>
-                        <li>
+                        <li th:each="match : ${matches}">
                             <div class="search_img">
-                                <img alt="" src="../static/img/showPicture/tkzc.jpg">
                                 <div class="info">
-                                    <h3><a href="#" target="_blank">【<span class="organizer">重庆文理学院</span>】<span class="competition">乒乓球比赛</span></a></h3>
+                                    <h3><a href="#" >【<span class="organizer" th:text="${match.organizer}"></span>】
+                                        <span class="competition" th:text="${match.name}"></span>
+                                    </a></h3>
                                     <p class="txt_pro">
-                                        <a href="#"><span class="fa fa-tags"></span>乒乓球男子双人组</a>
+                                        <a href="#"><span class="fa fa-tags"></span></a>
                                     </p>
                                     <p class="txt_time">
-                                        <a href="#"><span class="fa fa-calendar"></span>2019.04.22 周一 09:30</a>
+                                        <a href="#"><span class="fa fa-calendar" th:text="${#dates.format(match.subjectTimeStart,'yyyy/MM/dd HH:MM')}"></span></a>
                                     </p>
                                     <p class="txt_add">
-                                        <a href="#"><span class="fa fa-map-marker "></span>永川体育中心 - 重庆</a>
+                                        <a href="#"><span class="fa fa-map-marker"></span>永川体育中心 - 重庆</a>
                                     </p>
                                     <p class="txt_piao">
-                                        <span class="fa fa-user"></span><em>200人</em> <span class="badge green">报名中
-                                    </span>
+                                        <span class="fa fa-user"></span><em th:text="${match.number}+'人'"></em>
+                                        <span class="badge green" th:text="报名截止" th:if="${match.state=='ending'}"></span>
+                                        <span class="badge green" th:text="报名中" th:if="${match.state=='Enrolment'}"></span>
+                                        <span class="badge green" th:text="未开始" th:if="${match.state=='Waiting'}"></span>
                                     </p>
                                 </div>
                                 <div class="gp_btn">
-                                    <button class="btn btn-primary" style="float: right;"  data-toggle="modal" data-target="#empUpdateModal1">报名</button>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="search_img">
-                                <img alt="" src="../static/img/showPicture/tkzc.jpg">
-                                <div class="info">
-                                    <h3><a href="#" target="_blank">【<span class="organizer">永川区政府</span>】<span class="competition">游泳比赛</span></a></h3>
-                                    <p class="txt_pro">
-                                        <a href="#"><span class="fa fa-tags"></span>100米蝶泳</a>
-                                    </p>
-                                    <p class="txt_time">
-                                        <a href="#"><span class="fa fa-calendar"></span>2019.04.22 周一 19:30</a>
-                                    </p>
-                                    <p class="txt_add">
-                                        <a href="#"><span class="fa fa-map-marker "></span>永川体育中心 - 重庆</a>
-                                    </p>
-                                    <p class="txt_piao">
-                                        <span class="fa fa-user"></span><em>200人</em> <span class="badge red">报名截止
-                                    </span>
-                                    </p>
-                                </div>
-                                <div class="gp_btn">
-                                    <button class="btn btn-primary" style="float: right;"  data-toggle="modal" data-target="#empUpdateModal1" disabled>报名</button>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="search_img">
-                                <img alt="" src="../static/img/showPicture/tkzc.jpg">
-                                <div class="info">
-                                    <h3><a href="#" target="_blank">【<span class="organizer">永川区政府</span>】<span class="competition">乒乓球比赛</span></a></h3>
-                                    <p class="txt_pro">
-                                        <a href="#"><span class="fa fa-tags"></span>乒乓球单人组</a>
-                                    </p>
-                                    <p class="txt_time">
-                                        <a href="#"><span class="fa fa-calendar"></span>2019.04.22 周一 19:30</a>
-                                    </p>
-                                    <p class="txt_add">
-                                        <a href="#"><span class="fa fa-map-marker "></span>永川体育中心 - 重庆</a>
-                                    </p>
-                                    <p class="txt_piao">
-                                        <span class="fa fa-user"></span><em>200人</em> <span class="badge green">报名中
-                                    </span>
-                                    </p>
-                                </div>
-                                <div class="gp_btn">
-                                    <button class="btn btn-primary" style="float: right;"  data-toggle="modal" data-target="#empUpdateModal1">报名</button>
+                                    <span th:text="${match.id}" style="display: none"></span>
+                                    <button class="btn btn-primary enroll" style="float: right;"  data-toggle="modal" data-target="#empUpdateModal1">报名</button>
                                 </div>
                             </div>
                         </li>
@@ -196,21 +128,22 @@
                                 </div>
                                 <div class="modal-body" style="height: 250px;">
                                     <form>
-                                        <img alt="" src="../static/img/showPicture/tkzc.jpg">
+                                        <input type="hidden" name="username" th:value="${session.user.username}"/>
+                                        <input type="hidden" name="entryMatchId" id="entryMatchId"/>
+                                        <input type="hidden" name="matchState" value="Enrolling"/>
                                         <div class="info">
-                                            <h3><a href="#" target="_blank">【<span class="organizer">重庆文理学院</span>】<span class="competition">乒乓球比赛</span></a></h3>
+                                            <h3><a href="#">【<span class="organizer" id="organizer1"></span>】<span class="name" id="name1"></span></a></h3>
                                             <p class="txt_pro">
                                                 <a href="#"><span class="fa fa-tags"></span>乒乓球男子双人组</a>
                                             </p>
                                             <p class="txt_time">
-                                                <a href="#"><span class="fa fa-calendar"></span>2019.04.22 周一 09:30</a>
+                                                <a href="#"><span class="fa fa-calendar" id="subjectStart"></span></a>
                                             </p>
                                             <p class="txt_add">
-                                                <a href="#"><span class="fa fa-map-marker "></span>永川体育中心 - 重庆</a>
+                                                <a href="#"><span class="fa fa-map-marker"></span>永川体育中心 - 重庆</a>
                                             </p>
                                             <p class="txt_piao">
-                                                <span class="fa fa-user"></span><em>200人</em> <span class="badge green">报名中
-                                    </span>
+                                                <span class="fa fa-user"></span><em>200</em> <span class="badge green" id="state1"></span>
                                             </p>
                                         </div>
                                     </form>
@@ -233,13 +166,13 @@
                             </div>
                             <div style="text-align: center;">
                                 <ul class="pagination">
-                                    <li><a th:href="@{/BackstageTicket(type=${type},subtype=${subtype},PageNum=1)}">首页</a></li>
-                                    <li><a th:href="@{/BackstageTicket(type=${type},subtype=${subtype},PageNum=${page.prePage})}" th:onclick="Jump(${page.prePage})" th:if="${page.isFirstPage}==false">&lt;上一页</a></li>
+                                    <li><a th:href="@{/matchPage(subject=${subject},category=${category},PageNum=1)}">首页</a></li>
+                                    <li><a th:href="@{/matchPage(subject=${subject},category=${category},PageNum=${page.prePage})}" th:onclick="Jump(${page.prePage})" th:if="${page.isFirstPage}==false">&lt;上一页</a></li>
                                     <li th:each="navigatepageNum : ${page.navigatepageNums}">
-                                        <a th:value="${navigatepageNum}" th:text="${navigatepageNum}" th:href="@{/BackstageTicket(type=${type},subtype=${subtype},PageNum=${navigatepageNum})}"></a>
+                                        <a th:value="${navigatepageNum}" th:text="${navigatepageNum}" th:href="@{/matchPage(subject=${subject},category=${category},PageNum=${navigatepageNum})}"></a>
                                     </li>
-                                    <li><a th:href="@{/BackstageTicket(type=${type},subtype=${subtype},PageNum=${page.nextPage})}" th:if="${page.isLastPage}==false">下一页&gt;</a></li>
-                                    <li><a th:href="@{/BackstageTicket(type=${type},subtype=${subtype},PageNum=${page.pages})}">末页</a></li>
+                                    <li><a th:href="@{/matchPage(subject=${subject},category=${category},PageNum=${page.nextPage})}" th:if="${page.isLastPage}==false">下一页&gt;</a></li>
+                                    <li><a th:href="@{/matchPage(subject=${subject},category=${category},PageNum=${page.pages})}">末页</a></li>
                                 </ul>
                             </div>
                             <!-- <span><input type="text" class="ipt" value="" id="_page_input_num" #if($pages == 0)disabled#end/></span>
@@ -256,73 +189,38 @@
 </div>
 
 <script>
-    //  选项卡
-    window.onload = function () {
-        var Search = document.getElementsByClassName("search")[0];
-        var Categories = Search.getElementsByClassName("Categories")[0];
-        var C_a = Categories.getElementsByClassName("all")[0].getElementsByTagName("a")[0];
-        var C_item = Categories.getElementsByTagName("li");
-        var Small_class = Search.getElementsByClassName("Small_class")[0];
-        var S_a = Small_class.getElementsByClassName("all")[0].getElementsByTagName("a")[0];
-        var S_right = Small_class.getElementsByClassName("right");
-
-        var C_len = C_item.length,
-            S_len = S_right.length;
-
-        for (var i = 0; i < C_len; i ++){
-            C_item[i].index = i;
-            C_item[i].onclick = function () {
-                for (var j = 0; j < C_len; j ++){
-                    C_item[j].className = "";
-                    C_a.className = "";
-                    S_right[j].style.display = "none";
-                    S_right[j].classList.remove("show");
+    //获取比赛的信息
+    $(".enroll").click(function () {
+        var id = $(this).parent().find("span").text();
+        $.ajax({
+            url:"/match/"+id,
+            type:"GET",
+            success:function (result) {
+                $("#organizer1").text(result.organizer);
+                $("#name1").text(result.name);
+                $("#subjectStart").text(result.subjectTimeStart);
+                $("#entryMatchId").val(result.id);
+                if (result.state=="Enrolment") {
+                    $("#state1").text("报名中")
+                }else if (result.state=="Waiting") {
+                    $("#state1").text("未开始")
+                }else{
+                    $("#state1").text("报名截止")
                 }
-                this.className = "this";
-                Small_class.style.display = "block";
-                S_right[this.index].style.display = "block";
-                S_right[this.index].classList.add("show");
-                S_a.className = "this";
-
-                var S_R_show = Small_class.getElementsByClassName("show")[0];
-                var S_R_item = S_R_show.getElementsByTagName("li");
-                var SR_len = S_R_item.length;
-                for (var m = 0; m < SR_len; m ++){
-                    S_R_item[m].onclick = function () {
-                        for (var n = 0; n < SR_len; n ++){
-                            S_R_item[n].className = "";
-                            S_a.className = "";
-                        }
-                        this.className = "this";
-                    };
-                    S_a.onclick = function () {
-                        for (var n = 0; n < SR_len; n ++){
-                            S_R_item[n].className = "";
-                        }
-                        this.className = "this";
-                    }
-                }
-            };
-            C_a.onclick = function () {
-                for (var j = 0; j < C_len; j ++){
-                    C_item[j].className = "";
-                    S_right[j].style.display = "none";
-                    Small_class.style.display = "none";
-                    S_right[j].classList.remove("show");
-                }
-                this.className = "this";
-                S_right[this.index].style.display = "none";
-                Small_class.style.display = "none";
-                S_right[this.index].classList.remove("show");
             }
-        }
-    };
-
-    var Pay = document.getElementById("pay");
-    Pay.onclick = function () {
-
-    };
-
+        })
+    });
+    //点击报名，开始报名
+    $("#pay").click(function () {
+        $.ajax({
+            url:"/EnrollMatch",
+            type:"POST",
+            data:$("#empUpdateModal1 form").serialize(),
+            success:function (result) {
+                alert(result);
+            }
+        })
+    })
 </script>
 </body>
 </html>

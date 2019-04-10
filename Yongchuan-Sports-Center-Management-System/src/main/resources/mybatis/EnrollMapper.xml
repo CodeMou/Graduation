@@ -8,10 +8,6 @@
     <result column="match_state" jdbcType="VARCHAR" property="matchState" />
     <result column="entry_subject_id" jdbcType="INTEGER" property="entrySubjectId" />
     <result column="subject_state" jdbcType="VARCHAR" property="subjectState" />
-    <result column="entry_field_name" jdbcType="VARCHAR" property="entryFieldName" />
-    <result column="field_state" jdbcType="VARCHAR" property="fieldState" />
-    <result column="appoint_start_time" jdbcType="VARCHAR" property="appointStartTime" />
-    <result column="appoint_end_time" jdbcType="VARCHAR" property="appointEndTime" />
     <result column="raw_add_time" jdbcType="TIMESTAMP" property="rawAddTime" />
     <result column="raw_update_time" jdbcType="TIMESTAMP" property="rawUpdateTime" />
   </resultMap>
@@ -74,8 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, entry_match_id, match_state, entry_subject_id, subject_state, entry_field_name, 
-    field_state, appoint_start_time, appoint_end_time, raw_add_time, raw_update_time
+    id, username, entry_match_id, match_state, entry_subject_id, subject_state, raw_add_time, 
+    raw_update_time
   </sql>
   <select id="selectByExample" parameterType="com.cqwu.graduation.bean.EnrollExample" resultMap="BaseResultMap">
     select
@@ -100,14 +96,10 @@
   <insert id="insert" parameterType="com.cqwu.graduation.bean.Enroll">
     insert into enroll (id, username, entry_match_id, 
       match_state, entry_subject_id, subject_state, 
-      entry_field_name, field_state, appoint_start_time, 
-      appoint_end_time, raw_add_time, raw_update_time
-      )
+      raw_add_time, raw_update_time)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{entryMatchId,jdbcType=INTEGER}, 
       #{matchState,jdbcType=VARCHAR}, #{entrySubjectId,jdbcType=INTEGER}, #{subjectState,jdbcType=VARCHAR}, 
-      #{entryFieldName,jdbcType=VARCHAR}, #{fieldState,jdbcType=VARCHAR}, #{appointStartTime,jdbcType=VARCHAR}, 
-      #{appointEndTime,jdbcType=VARCHAR}, now() ,now()
-      )
+     now(), now())
   </insert>
   <insert id="insertSelective" parameterType="com.cqwu.graduation.bean.Enroll">
     insert into enroll
@@ -129,18 +121,6 @@
       </if>
       <if test="subjectState != null">
         subject_state,
-      </if>
-      <if test="entryFieldName != null">
-        entry_field_name,
-      </if>
-      <if test="fieldState != null">
-        field_state,
-      </if>
-      <if test="appointStartTime != null">
-        appoint_start_time,
-      </if>
-      <if test="appointEndTime != null">
-        appoint_end_time,
       </if>
       <if test="rawAddTime != null">
         raw_add_time,
@@ -167,18 +147,6 @@
       </if>
       <if test="subjectState != null">
         #{subjectState,jdbcType=VARCHAR},
-      </if>
-      <if test="entryFieldName != null">
-        #{entryFieldName,jdbcType=VARCHAR},
-      </if>
-      <if test="fieldState != null">
-        #{fieldState,jdbcType=VARCHAR},
-      </if>
-      <if test="appointStartTime != null">
-        #{appointStartTime,jdbcType=VARCHAR},
-      </if>
-      <if test="appointEndTime != null">
-        #{appointEndTime,jdbcType=VARCHAR},
       </if>
       <if test="rawAddTime != null">
         #{rawAddTime,jdbcType=TIMESTAMP},
@@ -215,18 +183,6 @@
       <if test="record.subjectState != null">
         subject_state = #{record.subjectState,jdbcType=VARCHAR},
       </if>
-      <if test="record.entryFieldName != null">
-        entry_field_name = #{record.entryFieldName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.fieldState != null">
-        field_state = #{record.fieldState,jdbcType=VARCHAR},
-      </if>
-      <if test="record.appointStartTime != null">
-        appoint_start_time = #{record.appointStartTime,jdbcType=VARCHAR},
-      </if>
-      <if test="record.appointEndTime != null">
-        appoint_end_time = #{record.appointEndTime,jdbcType=VARCHAR},
-      </if>
       <if test="record.rawAddTime != null">
         raw_add_time = #{record.rawAddTime,jdbcType=TIMESTAMP},
       </if>
@@ -246,10 +202,6 @@
       match_state = #{record.matchState,jdbcType=VARCHAR},
       entry_subject_id = #{record.entrySubjectId,jdbcType=INTEGER},
       subject_state = #{record.subjectState,jdbcType=VARCHAR},
-      entry_field_name = #{record.entryFieldName,jdbcType=VARCHAR},
-      field_state = #{record.fieldState,jdbcType=VARCHAR},
-      appoint_start_time = #{record.appointStartTime,jdbcType=VARCHAR},
-      appoint_end_time = #{record.appointEndTime,jdbcType=VARCHAR},
       raw_add_time = #{record.rawAddTime,jdbcType=TIMESTAMP},
       raw_update_time = #{record.rawUpdateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">

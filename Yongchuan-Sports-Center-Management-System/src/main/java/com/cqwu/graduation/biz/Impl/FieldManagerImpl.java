@@ -25,7 +25,7 @@ import java.util.List;
  * @since 2019/3/5
  */
 @Service
-@CacheConfig(cacheNames = "field")
+//@CacheConfig(cacheNames = "field")
 public class FieldManagerImpl implements FieldManager {
 
 	@Autowired
@@ -59,7 +59,7 @@ public class FieldManagerImpl implements FieldManager {
 	}
 
 	@Override
-	@Cacheable
+//	@Cacheable
 	public PageInfo<Field> selectByExample(Integer id) {
 		FieldExample example = new FieldExample();
 		FieldExample.Criteria criteria = example.createCriteria();
@@ -73,7 +73,7 @@ public class FieldManagerImpl implements FieldManager {
 	}
 
 	@Override
-	@Cacheable
+//	@Cacheable
 	public List<Field> selectByName(String name) {
 		FieldExample example = new FieldExample();
 		FieldExample.Criteria criteria = example.createCriteria();
@@ -83,7 +83,7 @@ public class FieldManagerImpl implements FieldManager {
 	}
 
 	@Override
-	@CacheEvict(key = "#record",allEntries = true)
+//	@CacheEvict(key = "#record",allEntries = true)
 	public int updateByExampleSelective(Field record) {
 		FieldExample example = new FieldExample();
 		FieldExample.Criteria criteria = example.createCriteria();

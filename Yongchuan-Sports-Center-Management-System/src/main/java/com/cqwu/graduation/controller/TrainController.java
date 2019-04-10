@@ -43,7 +43,7 @@ public class TrainController {
 		model.addAttribute("page", trainPageInfo);
 		model.addAttribute("subject", subject);
 		model.addAttribute("trains",trainPageInfo.getList());
-		return "/Train";
+		return "Train";
 	}
 
 	/**

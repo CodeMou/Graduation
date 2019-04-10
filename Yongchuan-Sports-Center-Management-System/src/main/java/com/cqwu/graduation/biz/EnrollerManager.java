@@ -32,12 +32,10 @@ public interface EnrollerManager {
 	int insertOftrain(Enroll record);
 	//根据用户名，找到用户名对应某次的比赛场次
 	long countMatchByUsername(Integer matchId,String username);
+	//查询比赛是否重复报名
+	long countMatchRepeat(Integer matchId, String username);
 	//根据用户名，找到用户名对应的培训场次
 	long countTrainByUsername(Integer trainId,String username);
-	//根据用户名，找到用户名对应的预约的场地数
-	long countFieldByUsername(String fieldName,String username);
-	//根据用户名，预约开始时间和预约结束时间计算人数
-	long countFieldByBoss(String openTimeStart,String openTimeEnd);
 	//根据用户名，找到用户名对应的所有信息
 	List<Enroll> selectByUsername(String username);
 }

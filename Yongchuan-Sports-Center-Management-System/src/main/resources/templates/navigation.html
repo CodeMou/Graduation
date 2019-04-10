@@ -50,10 +50,10 @@
         </div>
         <div class="collapse navbar-collapse" id="nav">
             <ul class="nav navbar-nav">
-                <li class="active"><a th:href="@{/fieldPage}">预约场地</a></li>
-                <li><a th:href="@{/navigation}">购票系统</a></li>
-                <li><a th:href="@{/trainPage}">培训报名</a></li>
-                <li><a th:href="@{/matchPage}">比赛报名</a></li>
+                <li th:class="${whatPage=='feild'?'active':''}"><a th:href="@{/navigation(page='feild')}">预约场地</a></li>
+                <li th:class="${whatPage=='ticket'?'active':''}"><a th:href="@{/navigation(page='ticket')}">购票系统</a></li>
+                <li th:class="${whatPage=='train'?'active':''}"><a th:href="@{/navigation(page='train')}">培训报名</a></li>
+                <li th:class="${whatPage=='match'?'active':''}"><a th:href="@{/navigation(page='match')}">比赛报名</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -68,7 +68,10 @@
         </div>
     </div>
     <div id="page">
-            <iframe id="nav_1" th:src="@{/ticketPurchase(type='',subtype='')}" width="100%" height="100%" style="border: none;"></iframe>
+            <iframe th:if="${whatPage=='ticket'}" id="nav_1" th:src="@{/ticketPurchase(type='',subtype='')}" width="100%" height="100%" style="border: none;"></iframe>
+            <iframe th:if="${whatPage=='match'}" id="nav_2" th:src="@{/matchPage(subject='',category='')}" width="100%" height="100%" style="border: none;"></iframe>
+            <iframe th:if="${whatPage=='feild'}" id="nav_3" th:src="@{/fieldPage}" width="100%" height="100%" style="border: none;"></iframe>
+            <iframe th:if="${whatPage=='train'}" id="nav_4" th:src="@{/trainPage(subject='')}" width="100%" height="100%" style="border: none;"></iframe>
     </div>
 </nav>
 <script src="webjars/jquery/1.12.1/jquery.min.js"></script>
@@ -103,7 +106,6 @@
         }
 
     }
-
 </script>
 </body>
 </html>
